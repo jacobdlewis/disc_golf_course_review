@@ -1,17 +1,6 @@
 #!/usr/bin/env ruby
 require 'highline/import'
 
-menu_prompt = <<EOS
-1. Add a course to your Wish List
-2. View your course Wish List
-3. Remove a course from your Wish List
-4. View your played courses
-5. Review a played course
-6. Import Data
-7. Exit
-
-EOS
-
 if ARGV.length > 0
   print "[Help] Unnecessary argument. Run as: ./disc_golf_course_tracker"
 elsif ARGV.length == 0

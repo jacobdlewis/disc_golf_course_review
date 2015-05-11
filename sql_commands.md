@@ -41,7 +41,7 @@
       review_date TEXT NOT NULL,
       score INTEGER NULL,
       recommend INTEGER,
-      FOREIGN KEY(course_id) REFERENCES courses(id)
+      FOREIGN KEY(course_id) REFERENCES completed_courses(course_id)
     );
 
 ### add course
