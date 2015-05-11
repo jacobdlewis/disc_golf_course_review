@@ -124,4 +124,27 @@ EOS
     assert_equal expected_output, shell_output
   end
 
+  def test_importing_data_from_CSV
+    shell_output = ""
+    expected_output = ""
+    IO.popen('./disc_golf_course_tracker', 'r+') do |pipe|
+      expected_output = <<EOS
+1. Add a course to your Wish List
+2. View your course Wish List
+3. Remove a course from your Wish List
+4. View your played courses
+5. Review a played course
+6. Import Data
+7. Exit
+EOS
+      pipe.puts "6"
+      expected_output << "What is the file path to the .CSV file you'd like to import? Import must be in the format of (id, name, city, state, zip code, street address, holes, paid?)\n"
+      pipe.puts "../users/desktop/database.db"
+      expected_output << "Your course information has been uploaded successfully.\n"
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    assert_equal expected_output, shell_output
+  end
+
 end
