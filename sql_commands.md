@@ -10,7 +10,9 @@
       city VARCHAR NOT NULL,
       state VARCHAR NOT NULL,
       street_address VARCHAR NULL,
-      zip_code VARCHAR NULL
+      zip_code VARCHAR NULL,
+      holes INTEGER NULL,
+      paid INTEGER NULL
     );
 
 ###create wish_list table
@@ -44,5 +46,5 @@
 
 ### add course
     INSERT INTO courses
-    ( name,  city, state, street_address, zip_code )
-    VALUES ( "Seven Oaks Park", "Nashville", "TN", "School Lane", "37076");
+    ( name,  city, state, street_address, zip_code, holes, paid )
+    VALUES ( "Seven Oaks Park", "Nashville", "TN", "School Lane", "37076", 18, 0);
