@@ -4,12 +4,13 @@ A command line application for planning and tracking games of disc golf at vario
 ##Project Vision
 This app will be a small command-line program that tracks disc golf courses the user has played and wants to play. 
 
-Users will be able to add courses to their "wish list," mark played courses as "completed," and track things like scores, conditions, and overall experience for each instance of playing a course. Wish list course entries will be comprised of course name, course location, number of holes, and paid/free. Played courses will be displayed in list form, showing the course that was "completed" as well as the number of times it's been played. Users will be able to drill down into their list of courses played to see scores, conditions, and a "# of stars rating" for overall experience for each course visit. 
+Users will be able to add courses to their "wish list," mark played courses as "completed," and track things like scores and whether they'd recommend the course for each instance of playing a course. Wish list course entries will be comprised of course name, course location, number of holes, and paid/free. Played courses will be displayed in list form, showing the course that was "completed" as well as the number of times it's been played. 
 
 ##Features 
 
 * Add courses to Wish List
-* Mark Wish List courses as played & add course review
+* Mark Wish List courses as played
+* Add reviews for completed courses
 * View Wish List
 * View Played Courses
 * Initial Data Import
@@ -25,11 +26,12 @@ Usage Example:
 > 3. "[course title] has been added successfully" prints on the screen
 
 Acceptance Criteria: 
- * Adding a course creates a new course listing in the database's courses table
- * 
+
+* Adding a course creates a new course listing in the database's courses table
+* Adding a course creates a new listing in the wish_list table
 
 ### Mark a Course as Played
-In order to achieve a sense of progress, the user should be able to mark courses they've played as completed. When the user marks the course as complete, they should be prompted for their score, their assessment of course conditions, and whether they'd recommend the course to a friend.
+In order to achieve a sense of progress, the user should be able to mark courses they've played as completed, moving the course from Wish List to Completed Courses. When the user marks the course as complete, they should be prompted for their score and whether they'd recommend the course to a friend.
 
 Usage Example: 
 > ./disc_golf_course_tracker
@@ -37,15 +39,14 @@ Usage Example:
 > 1. View Wish List courses
 > 2. Mark course as completed
 > 3. Enter their course score
-> 4. Enter their assessment of course conditions
-> 5. Enter y/n for whether they'd recommend the course to a friend
-> 6. "[course title] has been marked as played. You have [number] courses remaining on your Wish List. You've played [number] courses." prints to the screen
+> 4. Enter y/n for whether they'd recommend the course to a friend
+> 5. "[course title] has been marked as played. You have [number] courses remaining on your Wish List. You've played [number] courses." prints to the screen
 
 ###Acceptance Criteria: 
-  * Marking a course as completed adds the course ID to the played courses table in the database
-  * The user's review is added to a reviews table in the database.
-  * The course that was completed is removed from the wish list table. 
- 
+ * Marking a course as completed adds the course ID to the completed_courses table in the database
+ * The course is removed from the Wish List table
+ * The user's review is added to a reviews table in the database.
+
 ## Deleting a course
 In order to remove courses that have been closed or that the user no longer wishes to play, the user should be able to delete a wish list course. 
 
@@ -73,7 +74,8 @@ In order to determine whether the user enjoyed their experience playing a course
 > 2. View your course Wish List
 > 3. Remove a course from your Wish List
 > 4. View your played courses
-> 5. Import Data
+> 5. Review a played course
+> 6. Import Data
 
 > user selects "4. View your played courses"
 
@@ -105,7 +107,8 @@ In order to avoid manual data entry, the user should be able to import course da
 > 2. View your course Wish List
 > 3. Remove a course from your Wish List
 > 4. View your played courses
-> 5. Import Data
+> 5. Review a played course
+> 6. Import Data
 > 
 > User selects 'Import Data'
 > 
@@ -118,4 +121,3 @@ In order to avoid manual data entry, the user should be able to import course da
 
 ###Acceptance Criteria
 * The user is able to populate the database's courses table by importing a csv file. 
-
