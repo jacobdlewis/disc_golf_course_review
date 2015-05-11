@@ -6,7 +6,16 @@ if ARGV.length > 0
 elsif ARGV.length == 0
   choose do |menu|
     menu.prompt = ""
-    menu.choice("Add a course to your Wish List") { say("")}
+    menu.choice("Add a course to your Wish List") {
+      name = ask("What is the name of the course?")
+      city = ask("In what city is the course located?")
+      state = ask("In what state is the course located?")
+      address = ask("What is the street address for the course?")
+      zip = ask("What is the ZIP code for the course?")
+      holes = ask("How many holes does the course have?")
+      paid = ask("Is the course paid or free?")
+      say("Thank you. #{name} has been added to your course Wish List.")
+    }
     menu.choice("View your course Wish List") { say("")}
     menu.choice("Remove a course from your Wish List") { say("")}
     menu.choice("View your played courses") { say("")}
