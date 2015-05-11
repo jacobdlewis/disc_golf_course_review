@@ -9,38 +9,97 @@ Users will be able to add courses to their "wish list," mark played courses as "
 ##Features 
 
 * Add courses to Wish List
+* View Wish List
 * Mark Wish List courses as played
 * Add reviews for completed courses
-* View Wish List
 * View Played Courses
-* Initial Data Import
+* Initial Data Import from CSV
 
-### Add course to Wish List
+##Main menu
+In order to move throughout the program and accomplish various tasks, the user should receive clear guidance from a written menu.
+
+> "What would you like to do?" prints to the screen.
+
+> 1. Add a course to you Wish List
+> 2. View your course Wish List
+> 3. Remove a course from your Wish List
+> 4. View your played courses
+> 5. Review a played course
+> 6. Import Data
+
+###Acceptance Criteria:
+
+ * The menu clearly lists user options.
+
+## Add course to Wish List
 In order to keep track of courses that the user wants to play in the future, the user should be able to add disc golf courses to a course wish list. 
 
-Usage Example:
+###Usage Example:
 > ./disc_golf_course_tracker
 > 
 > 1. Add a Course Name
-> 2. Add course attributes (street address, holes, paid/free)
-> 3. "[course title] has been added successfully" prints on the screen
+>
+> "What is the name of the course"
+>
+>  - "Seven Oaks Park"
+>
+> "In what city is the course located?"
+>
+> - "Nashville"
+>
+> "In what state is the course located?"
+>
+> - "TN"
+>
+> "What is the street address for the course? (optional)"
+>
+> - "3474 McGavock Pike"
+> 
+> "What is the ZIP code for the course? (optional)"
+>
+> - "37217"
+>
+> "How many holes does the course have? (optional)"
+> 
+> - "18"
+>
+> "Is the course paid or free? (optional)"
+>
+> - "paid"
+> 
+> "Thank you. Seven Oaks Park has been added to your course Wish List"
 
-Acceptance Criteria: 
+###Acceptance Criteria: 
 
 * Adding a course creates a new course listing in the database's courses table
 * Adding a course creates a new listing in the wish_list table
 
-### Mark a Course as Played
+## Mark a Course as Played
 In order to achieve a sense of progress, the user should be able to mark courses they've played as completed, moving the course from Wish List to Completed Courses. When the user marks the course as complete, they should be prompted for their score and whether they'd recommend the course to a friend.
 
-Usage Example: 
+###Usage Example: 
 > ./disc_golf_course_tracker
 > 
-> 1. View Wish List courses
-> 2. Mark course as completed
-> 3. Enter their course score
-> 4. Enter y/n for whether they'd recommend the course to a friend
-> 5. "[course title] has been marked as played. You have [number] courses remaining on your Wish List. You've played [number] courses." prints to the screen
+> user selects "View your course Wish List" from the main menu
+> 
+> 1. Seven Oaks Park
+> 2. Cedar Hill Park
+> 3. Crockett Park
+> 4. Rollin Ridge Disc Golf
+>
+> "Would you like to:"
+>
+> a) Return to main menu
+>
+> b) Mark a course as complete
+>
+> user selects: "b) Mark a course as complete"
+> 
+> "Which course would you like to complete?"
+>
+> user enters: 1
+>
+> "Thank you. Seven Oaks Park has been marked as complete"
 
 ###Acceptance Criteria: 
  * Marking a course as completed adds the course ID to the completed_courses table in the database
@@ -53,10 +112,21 @@ In order to remove courses that have been closed or that the user no longer wish
 ###Usage Example:
 > ./disc_golf_course_tracker
 > 
-> 1. Select "Delete Wish List course"
-> 2. See "Are you sure you'd like to remove [course name] from your Wish List? (y/n)"?
->   - If 'y,' see "[course name] has been removed from you Wish List."
->   - If 'n,' see "What would you like to do?" menu prompt.
+> user selects "Remove a course from your Wish List" from the main menu
+> 
+> 1. Cedar Hill Park
+> 2. Crockett Park
+> 3. Rollin Ridge Disc Golf
+> 
+> "Which course would you like to remove?"
+> 
+> user enters: 2
+> 
+> "Are you sure you'd like to remove Crockett Park from your Wish List? (y/n)"
+>
+>  user enters: "y"
+>
+> "Thank you. Crockett Park has been removed from your Wish List."
 
 ###Acceptance Criteria: 
   * Deleting a course removes it from the courses table in the database
@@ -93,8 +163,8 @@ In order to determine whether the user enjoyed their experience playing a course
 ###Acceptance Criteria
 
 * A list of completed courses appears when the user selects "View your played courses"
-* The user can see instances/games of that course by selecting its number from the displayed list
-* 
+* The user can see instances/games of that course by selecting its number from the displayed list 
+
 ##Initial Data Import
 In order to avoid manual data entry, the user should be able to import course data via a CSV file. The initial import should allow users to populate the courses table.
 
