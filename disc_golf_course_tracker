@@ -1,9 +1,13 @@
 #!/usr/bin/env ruby
+require 'highline/import'
 
 if ARGV.length > 0
   print "[Help] Unnecessary argument. Run as: ./disc_golf_course_tracker"
 else
   puts <<EOS
+
+Hello. Welcome to Disc Golf Course Tracker!
+
 What would you like to do?
 
 1. Add a course to you Wish List
@@ -12,5 +16,7 @@ What would you like to do?
 4. View your played courses
 5. Review a played course
 6. Import Data
+7. Exit
+
 EOS
 end

@@ -44,6 +44,9 @@ class AddNewCourseTest < Minitest::Test
     expected_output = ""
     IO.popen('./disc_golf_course_tracker') do |pipe|
       expected_output = <<EOS
+
+Hello. Welcome to Disc Golf Course Tracker!
+
 What would you like to do?
 
 1. Add a course to you Wish List
@@ -52,6 +55,8 @@ What would you like to do?
 4. View your played courses
 5. Review a played course
 6. Import Data
+7. Exit
+
 EOS
     shell_output = pipe.read
     end
@@ -66,6 +71,9 @@ EOS
       shell_output = pipe.read
     end
     assert_equal expected_output, shell_output
+  end
+
+  def test_exiting_program
   end
 
 end

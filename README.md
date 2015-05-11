@@ -138,27 +138,25 @@ In order to determine whether the user enjoyed their experience playing a course
 ###Usage Example:
 > ./disc_golf_course_tracker
 
-> "What would you like to do?" prints to the screen.
-
-> 1. Add a course to you Wish List
-> 2. View your course Wish List
-> 3. Remove a course from your Wish List
-> 4. View your played courses
-> 5. Review a played course
-> 6. Import Data
-
-> user selects "4. View your played courses"
-
-> A list of completed courses prints to the screen.
-
-> "View your course review by typing the course's number" prints to the screen.
-
-> User types 2
-
-> Their review comments for the course print to the screen
-
-> * "Holes: 18 Score: 72 Date: 4/22/2015 Recommend? Yes
-> * "Holes: 18 Score: 68 Date: 5/06/2015 Recommend? Yes
+> user selects "View Played Courses" from main menu
+>
+> 1. Crockett Park, average_score: 80, rating: 7.5
+> 2. George Ward Park, average_score: 75, rating: 6.8
+> 3. Rollin Ridge Disc Golf, average_score: 82, rating: 8.0
+>
+> "View your course comments by typing the course's number"
+>
+> User enters: 2
+>
+> Here's what you've said about George Ward Park:
+>
+>On 4/08/2015:
+>
+>"The course is in good shape. Freshly mowed. No bugs"
+>
+>On 5/1/2015:
+>
+>"The course could use a mow, but is otherwise great. Not crowded for a weekend"
 
 ###Acceptance Criteria
 
