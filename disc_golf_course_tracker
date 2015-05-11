@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 
-puts <<EOS
+if ARGV.length > 0
+  print "[Help] Unnecessary argument. Run as: ./disc_golf_course_tracker"
+else
+  puts <<EOS
 What would you like to do?
 
 1. Add a course to you Wish List
@@ -10,3 +13,4 @@ What would you like to do?
 5. Review a played course
 6. Import Data
 EOS
+end
