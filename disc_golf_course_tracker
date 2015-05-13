@@ -19,10 +19,14 @@ elsif ARGV.length == 0
       zip = ask("What is the ZIP code for the course?")
       holes = ask("How many holes does the course have?")
       paid = ask("Is the course paid or free?")
+      Course.create(name, city, state, address, zip, holes, paid)
       say("Thank you. #{name} has been added to your course Wish List.")
+      exit 0
     }
     menu.choice("View your course Wish List") { courses_controller.index }
-    menu.choice("Remove a course from your Wish List") { say("")}
+    menu.choice("Remove a course from your Wish List") { 
+      course = ask("What is the name of the course you'd like to delete?")
+      Course.delete(course) }
     menu.choice("View your played courses") { say("")}
     menu.choice("Review a played course") { say("")}
     menu.choice("Import Data") {

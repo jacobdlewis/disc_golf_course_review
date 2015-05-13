@@ -31,11 +31,28 @@ describe Course do
     end
     describe "if there are scenarios" do
       before do
-        create_course("Seven Oaks Park", "Nashville", "TN", "3457 School Ln", "37217", "21", "free");
-        create_course("Rollin Ridge", "Baraboo", "WI", "333 Nowheresville", "53234", "36", "paid - $5");
+        create_course("Seven Oaks Park", "Nashville", "TN", "3457 School Ln", "37217", "21", "free")
+        create_course("Rollin Ridge", "Baraboo", "WI", "333 Nowheresville", "53234", "36", "paid - $5")
       end
       it "should return the correct count" do
         assert_equal 2, Course.count
+      end
+    end
+  end
+
+  describe "#delete" do
+    describe "if the specified course doesn't exist" do
+      it "should return a 'course not found' message" do
+        assert_equal "Course not found.", Course.delete("Seven Springs Resort")
+      end
+    end
+    describe "if the specified course does exist" do
+      before do
+        create_course("Seven Oaks Park", "Nashville", "TN", "3457 School Ln", "37217", "21", "free")
+        create_course("Rollin Ridge", "Baraboo", "WI", "333 Nowheresville", "53234", "36", "paid - $5")
+      end
+      it "should return a validation message when the course is deleted" do
+        assert_equal "Rollin Ridge was deleted successfully.", Course.delete("Rollin Ridge")
       end
     end
   end
