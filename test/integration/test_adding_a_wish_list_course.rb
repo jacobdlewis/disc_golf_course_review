@@ -1,13 +1,5 @@
 require_relative '../test_helper'
 
-# Add course to Wish List
-
-# In order to keep track of courses that the user wants to play in the future, the user should be able to add disc golf courses to a course wish list.
-
-# Usage Example:
-
-# ./disc_golf_course_tracker
-
 class AddNewCourseTest < Minitest::Test
 
   def test_adding_a_course

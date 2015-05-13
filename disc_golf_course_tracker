@@ -1,11 +1,16 @@
 #!/usr/bin/env ruby
 require 'highline/import'
 
+Dir["./app/**/*.rb"].each { |file| require file }
+Dir["./lib/*.rb"].each { |file| require file }
+
+
 if ARGV.length > 0
   print "[Help] Unnecessary argument. Run as: ./disc_golf_course_tracker"
 elsif ARGV.length == 0
   choose do |menu|
     menu.prompt = ""
+    courses_controller = CoursesController.new
     menu.choice("Add a course to your Wish List") {
       name = ask("What is the name of the course?")
       city = ask("In what city is the course located?")
@@ -16,7 +21,7 @@ elsif ARGV.length == 0
       paid = ask("Is the course paid or free?")
       say("Thank you. #{name} has been added to your course Wish List.")
     }
-    menu.choice("View your course Wish List") { say("")}
+    menu.choice("View your course Wish List") { courses_controller.index }
     menu.choice("Remove a course from your Wish List") { say("")}
     menu.choice("View your played courses") { say("")}
     menu.choice("Review a played course") { say("")}
