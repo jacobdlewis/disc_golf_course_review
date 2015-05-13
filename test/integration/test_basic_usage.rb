@@ -6,15 +6,7 @@ class TestBasicUsage < Minitest::Test
     shell_output = ""
     expected_output = ""
     IO.popen('./disc_golf_course_tracker', 'r+') do |pipe|
-      expected_output = <<EOS
-1. Add a course to your Wish List
-2. View your course Wish List
-3. Remove a course from your Wish List
-4. View your played courses
-5. Review a played course
-6. Import Data
-7. Exit
-EOS
+    expected_output << main_menu
     pipe.close_write
     shell_output = pipe.read
     end
@@ -35,15 +27,7 @@ EOS
     shell_output = ""
     expected_output = ""
     IO.popen('./disc_golf_course_tracker', 'r+') do |pipe|
-      expected_output = <<EOS
-1. Add a course to your Wish List
-2. View your course Wish List
-3. Remove a course from your Wish List
-4. View your played courses
-5. Review a played course
-6. Import Data
-7. Exit
-EOS
+      expected_output << main_menu
       pipe.puts "7"
       expected_output << "Goodbye!\n"
       pipe.close_write

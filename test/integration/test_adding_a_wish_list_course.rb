@@ -8,50 +8,13 @@ require_relative '../test_helper'
 
 # ./disc_golf_course_tracker
 
-# Add a Course Name
-# "What is the name of the course"
-
-# "Seven Oaks Park"
-# "In what city is the course located?"
-
-# "Nashville"
-# "In what state is the course located?"
-
-# "TN"
-# "What is the street address for the course? (optional)"
-
-# "3474 McGavock Pike"
-# "What is the ZIP code for the course? (optional)"
-
-# "37217"
-# "How many holes does the course have? (optional)"
-
-# "18"
-# "Is the course paid or free? (optional)"
-
-# "paid"
-# "Thank you. Seven Oaks Park has been added to your course Wish List"
-
-# Acceptance Criteria:
-
-# Adding a course creates a new course listing in the database's courses table
-# Adding a course creates a new listing in the wish_list table
-
 class AddNewCourseTest < Minitest::Test
 
   def test_adding_a_course
     shell_output = ""
     expected_output = ""
     IO.popen('./disc_golf_course_tracker', 'r+') do |pipe|
-      expected_output = <<EOS
-1. Add a course to your Wish List
-2. View your course Wish List
-3. Remove a course from your Wish List
-4. View your played courses
-5. Review a played course
-6. Import Data
-7. Exit
-EOS
+      expected_output << main_menu
       pipe.puts "1"
       expected_output << "What is the name of the course?\n"
       pipe.puts "Seven Oaks Park"
@@ -78,15 +41,7 @@ EOS
     shell_output = ""
     expected_output = ""
     IO.popen('./disc_golf_course_tracker', 'r+') do |pipe|
-      expected_output = <<EOS
-1. Add a course to your Wish List
-2. View your course Wish List
-3. Remove a course from your Wish List
-4. View your played courses
-5. Review a played course
-6. Import Data
-7. Exit
-EOS
+      expected_output << main_menu
       pipe.puts "6"
       expected_output << "What is the file path to the .CSV file you'd like to import? Import must be in the format of (id, name, city, state, zip code, street address, holes, paid?)\n"
       pipe.puts "../users/desktop/database.db"
