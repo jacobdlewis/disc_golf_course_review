@@ -18,6 +18,11 @@ describe Course do
       it "should return an array" do
         assert_equal Array, Course.all.class
       end
+      it "should return the courses in alphabetical order" do
+        expected = ["Rollin Ridge", "Seven Oaks Park"]
+        actual = Course.all.map { |course| course.name }
+        assert_equal expected, actual
+      end
     end
   end
 
