@@ -5,6 +5,7 @@ require 'sqlite3'
 
 Dir["./app/**/*.rb"].each { |file| require file }
 Dir["./lib/*.rb"].each { |file| require file }
+ENV["TEST"] = "true"
 
 reporter_options = { color: true }
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(reporter_options)]

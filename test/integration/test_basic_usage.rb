@@ -7,6 +7,7 @@ class TestBasicUsage < Minitest::Test
     expected_output = ""
     IO.popen('./disc_golf_course_tracker', 'r+') do |pipe|
     expected_output << main_menu
+    pipe.puts "4"
     pipe.close_write
     shell_output = pipe.read
     end

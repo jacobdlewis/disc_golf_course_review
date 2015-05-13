@@ -1,6 +1,11 @@
 # disc golf course review
 A command line application for planning and tracking games of disc golf at various courses.
 
+##Usage
+
+* Run 'rake bootstrap_database' to setup your local database
+* Then, `./disc_golf_course_tracker` to start the program
+
 ##Project Vision
 This app will be a small command-line program that tracks disc golf courses the user has played and wants to play.
 
