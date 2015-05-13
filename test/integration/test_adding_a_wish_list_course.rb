@@ -23,6 +23,9 @@ class AddNewCourseTest < Minitest::Test
       expected_output << "Is the course paid or free?\n"
       pipe.puts "free"
       expected_output << "Thank you. Seven Oaks Park has been added to your course Wish List.\n"
+      expected_output << main_menu
+      pipe.puts "7"
+      expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read
     end
@@ -38,6 +41,9 @@ class AddNewCourseTest < Minitest::Test
       expected_output << "What is the file path to the .CSV file you'd like to import? Import must be in the format of (id, name, city, state, zip code, street address, holes, paid?)\n"
       pipe.puts "../users/desktop/database.db"
       expected_output << "Your course information has been uploaded successfully.\n"
+      expected_output << main_menu
+      pipe.puts "7"
+      expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read
     end

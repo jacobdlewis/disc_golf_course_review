@@ -8,31 +8,35 @@ Dir["./lib/*.rb"].each { |file| require file }
 if ARGV.length > 0
   print "[Help] Unnecessary argument. Run as: ./disc_golf_course_tracker"
 elsif ARGV.length == 0
-  choose do |menu|
-    menu.prompt = ""
-    courses_controller = CoursesController.new
-    menu.choice("Add a course to your Wish List") {
-      name = ask("What is the name of the course?")
-      city = ask("In what city is the course located?")
-      state = ask("In what state is the course located?")
-      address = ask("What is the street address for the course?")
-      zip = ask("What is the ZIP code for the course?")
-      holes = ask("How many holes does the course have?")
-      paid = ask("Is the course paid or free?")
-      Course.create(name, city, state, address, zip, holes, paid)
-      say("Thank you. #{name} has been added to your course Wish List.")
-      exit 0
-    }
-    menu.choice("View your course Wish List") { courses_controller.index }
-    menu.choice("Remove a course from your Wish List") { 
-      course = ask("What is the name of the course you'd like to delete?")
-      Course.delete(course) }
-    menu.choice("View your played courses") { say("")}
-    menu.choice("Review a played course") { say("")}
-    menu.choice("Import Data") {
-      filepath = ask("What is the file path to the .CSV file you'd like to import? Import must be in the format of (id, name, city, state, zip code, street address, holes, paid?)")
-      say("Your course information has been uploaded successfully.")
-    }
-    menu.choice("Exit") { say("Goodbye!")}
+  loop do
+    choose do |menu|
+      menu.prompt = ""
+      courses_controller = CoursesController.new
+      menu.choice("Add a course to your Wish List") {
+        name = ask("What is the name of the course?")
+        city = ask("In what city is the course located?")
+        state = ask("In what state is the course located?")
+        address = ask("What is the street address for the course?")
+        zip = ask("What is the ZIP code for the course?")
+        holes = ask("How many holes does the course have?")
+        paid = ask("Is the course paid or free?")
+        Course.create(name, city, state, address, zip, holes, paid)
+        say("Thank you. #{name} has been added to your course Wish List.")
+      }
+      menu.choice("View your course Wish List") { courses_controller.index }
+      menu.choice("Remove a course from your Wish List") {
+        course = ask("What is the name of the course you'd like to delete?")
+        Course.delete(course) }
+      menu.choice("View your played courses") { say("")}
+      menu.choice("Review a played course") { say("")}
+      menu.choice("Import Data") {
+        filepath = ask("What is the file path to the .CSV file you'd like to import? Import must be in the format of (id, name, city, state, zip code, street address, holes, paid?)")
+        say("Your course information has been uploaded successfully.")
+      }
+      menu.choice("Exit") {
+        say("Goodbye!")
+        exit
+      }
+    end
   end
 end

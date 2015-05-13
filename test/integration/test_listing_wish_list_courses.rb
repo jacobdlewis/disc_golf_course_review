@@ -8,6 +8,9 @@ class TestListingWishListCourses < Minitest::Test
       expected_output << main_menu
       pipe.puts "2"
       expected_output << "No courses found. Add a course.\n"
+      expected_output << main_menu
+      pipe.puts "7"
+      expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read
     end
@@ -22,6 +25,9 @@ class TestListingWishListCourses < Minitest::Test
       expected_output << main_menu
       pipe.puts "2"
       expected_output << "1. Seven Oaks Park\n"
+      expected_output << main_menu
+      pipe.puts "7"
+      expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read
     end
