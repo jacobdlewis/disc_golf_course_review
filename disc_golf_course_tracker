@@ -15,14 +15,12 @@ elsif ARGV.length == 0
         courses_controller = CoursesController.new
         courses_controller.prompt
       }
-      menu.choice("View your course Wish List") { courses_controller.index }
+      menu.choice("View your course Wish List") {
+        courses_controller = CoursesController.new
+        courses_controller.index }
       menu.choice("Remove a course from your Wish List") { say("")}
       menu.choice("View your played courses") { say("")}
       menu.choice("Review a played course") { say("")}
-      menu.choice("Import Data") {
-        filepath = ask("What is the file path to the .CSV file you'd like to import? Import must be in the format of (id, name, city, state, zip code, street address, holes, paid?)")
-        say("Your course information has been uploaded successfully.")
-      }
       menu.choice("Exit") {
         say("Goodbye!")
         exit

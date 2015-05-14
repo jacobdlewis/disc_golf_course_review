@@ -1,6 +1,10 @@
 class Course
   attr_accessor :name
 
+  def initialize(name = nil)
+    @name = name
+  end
+
   def self.count
     Database.execute("select count(id) from courses")[0][0]
   end
