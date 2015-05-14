@@ -5,7 +5,6 @@ class Course
     Database.execute("select count(id) from courses")[0][0]
   end
 
-
   def self.all
     Database.execute("select name from courses order by name ASC").map do |row|
       course = Course.new

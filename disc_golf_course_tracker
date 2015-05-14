@@ -11,22 +11,12 @@ elsif ARGV.length == 0
   loop do
     choose do |menu|
       menu.prompt = ""
-      courses_controller = CoursesController.new
       menu.choice("Add a course to your Wish List") {
-        name = ask("What is the name of the course?")
-        city = ask("In what city is the course located?")
-        state = ask("In what state is the course located?")
-        address = ask("What is the street address for the course?")
-        zip = ask("What is the ZIP code for the course?")
-        holes = ask("How many holes does the course have?")
-        paid = ask("Is the course paid or free?")
-        Course.create(name, city, state, address, zip, holes, paid)
-        say("Thank you. #{name} has been added to your course Wish List.")
+        courses_controller = CoursesController.new
+        courses_controller.prompt
       }
       menu.choice("View your course Wish List") { courses_controller.index }
-      menu.choice("Remove a course from your Wish List") {
-        course = ask("What is the name of the course you'd like to delete?")
-        Course.delete(course) }
+      menu.choice("Remove a course from your Wish List") { say("")}
       menu.choice("View your played courses") { say("")}
       menu.choice("Review a played course") { say("")}
       menu.choice("Import Data") {
