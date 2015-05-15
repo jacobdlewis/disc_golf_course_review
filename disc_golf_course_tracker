@@ -28,3 +28,4 @@ elsif ARGV.length == 0
     end
   end
 end
+

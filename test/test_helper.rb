@@ -21,8 +21,8 @@ class Minitest::Test
   CREATE TABLE IF NOT EXISTS courses (
     id integer PRIMARY KEY AUTOINCREMENT,
     name varchar(100) NOT NULL,
-    city varchar(100) NOT NULL,
-    state varchar(25) NOT NULL,
+    city varchar(100),
+    state varchar(25),
     address varchar(100),
     zip varchar(20),
     holes varchar(10),
