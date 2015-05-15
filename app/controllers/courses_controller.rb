@@ -19,7 +19,7 @@ class CoursesController
     zip = ask("What is the ZIP code for the course?")
     holes = ask("How many holes does the course have?")
     paid = ask("Is the course paid or free?")
-    Course.create(name, city, state, address, zip, holes, paid)
+    Course.new(name)
     say("Thank you. #{name} has been added to your course Wish List.")
   end
 
