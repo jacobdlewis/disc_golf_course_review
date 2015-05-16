@@ -25,6 +25,7 @@ elsif ARGV.length == 0
         say("Goodbye!")
         exit
       }
+      puts"\n"
     end
   end
 end
