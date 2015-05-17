@@ -24,7 +24,7 @@ class Course
     if course == []
       false
     else
-      Database.execute("delete from courses where name like '%#{name}%'")
+      Database.execute("delete from courses where name like '#{name}%'")
       true
     end
   end

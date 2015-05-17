@@ -35,4 +35,38 @@ class TestDeletingWishListCourses < Minitest::Test
     assert_equal expected_output, shell_output
   end
 
+  def test_delete_should_not_accept_an_empty_response
+    shell_output = ""
+    expected_output = ""
+    IO.popen('./disc_golf_course_tracker', 'r+') do |pipe|
+      expected_output << main_menu
+      pipe.puts "1"
+      expected_output << "What is the name of the course?\n"
+      pipe.puts "Seven Oaks Park"
+      expected_output << "In what city is the course located?\n"
+      pipe.puts "Nashville"
+      expected_output << "In what state is the course located?\n"
+      pipe.puts "TN"
+      expected_output << "Thank you. Seven Oaks Park has been added to your course Wish List.\n"
+      expected_output << main_menu
+      pipe.puts "2"
+      expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park\n"
+      expected_output << view_courses_submenu
+      pipe.puts "2"
+      expected_output << "What is the name of the course you'd like to delete?\n"
+      pipe.puts "\n"
+      expected_output << "Your answer isn't valid (must match /\\w\/).\n"
+      pipe.puts "Seven Oaks Park"
+      expected_output << "?  Seven Oaks Park was deleted successfully\n"
+      expected_output << main_menu
+      pipe.puts "2"
+      expected_output << "No courses found. Add a course.\n"
+      expected_output << main_menu
+      pipe.puts "4"
+      expected_output << "Goodbye!\n"
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    assert_equal expected_output, shell_output
+  end
 end

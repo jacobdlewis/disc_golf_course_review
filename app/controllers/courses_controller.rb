@@ -50,7 +50,7 @@ private
         course = ask("What is the name of the course you'd like to update?")
       }
       submenu.choice("Delete a course") {
-        course = ask("What is the name of the course you'd like to delete?")
+        course = ask("What is the name of the course you'd like to delete?", String) { |q| q.validate = /\w/}
         say(CoursesController.new.remove(course))
       }
       submenu.choice("Mark a course as complete") {
