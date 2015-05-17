@@ -18,9 +18,7 @@ elsif ARGV.length == 0
       menu.choice("View your course Wish List") {
         courses_controller = CoursesController.new
         courses_controller.index }
-      menu.choice("Remove a course from your Wish List") { say("")}
       menu.choice("View your played courses") { say("")}
-      menu.choice("Review a played course") { say("")}
       menu.choice("Exit") {
         say("Goodbye!")
         exit

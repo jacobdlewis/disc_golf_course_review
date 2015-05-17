@@ -16,7 +16,7 @@ class AddNewCourseTest < Minitest::Test
       pipe.puts "TN"
       expected_output << "Thank you. Seven Oaks Park has been added to your course Wish List.\n"
       expected_output << main_menu
-      pipe.puts "6"
+      pipe.puts "4"
       expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read

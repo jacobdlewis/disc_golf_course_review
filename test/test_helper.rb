@@ -13,7 +13,7 @@ Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(reporter_opti
 require 'minitest/autorun'
 
 def main_menu
-  "\n1. Add a course to your Wish List\n2. View your course Wish List\n3. Remove a course from your Wish List\n4. View your played courses\n5. Review a played course\n6. Exit\n"
+  "\n1. Add a course to your Wish List\n2. View your course Wish List\n3. View your played courses\n4. Exit\n"
 end
 
 def view_courses_submenu

@@ -10,7 +10,7 @@ class TestListingWishListCourses < Minitest::Test
       pipe.puts "2"
       expected_output << "No courses found. Add a course.\n"
       expected_output << main_menu
-      pipe.puts "6"
+      pipe.puts "4"
       expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read
@@ -42,7 +42,7 @@ class TestListingWishListCourses < Minitest::Test
       pipe.puts "TN"
       expected_output << "Thank you. Token Creek has been added to your course Wish List.\n"
       expected_output << main_menu
-      pipe.puts "6"
+      pipe.puts "4"
       expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read
