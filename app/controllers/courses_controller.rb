@@ -24,6 +24,14 @@ class CoursesController
     end
   end
 
+  def remove(name)
+    if Course.delete(name)
+      "#{name} was deleted successfully"
+    else
+      "Course not found"
+    end
+  end
+
   def prompt
     name = ask("What is the name of the course?")
     city = ask("In what city is the course located?")
@@ -43,6 +51,7 @@ private
       }
       submenu.choice("Delete a course") {
         course = ask("What is the name of the course you'd like to delete?")
+        say(CoursesController.new.remove(course))
       }
       submenu.choice("Mark a course as complete") {
         course = ask("Which course wouldyou like to mark as complete?")

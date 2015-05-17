@@ -16,6 +16,10 @@ def main_menu
   "\n1. Add a course to your Wish List\n2. View your course Wish List\n3. Remove a course from your Wish List\n4. View your played courses\n5. Review a played course\n6. Exit\n"
 end
 
+def view_courses_submenu
+  "\nWould you like to...\n1. Update a course\n2. Delete a course\n3. Mark a course as complete\n4. Return to main menu\n"
+end
+
 class Minitest::Test
   def setup
     Database.execute <<-SQL
