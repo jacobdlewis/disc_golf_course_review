@@ -1,9 +1,11 @@
 class Course
-  attr_accessor :name, :city, :state
-  attr_reader :id, :errors
+  attr_accessor :name
+  attr_reader :id, :errors, :city, :state
 
-  def initialize(name = nil)
+  def initialize(name, city, state)
     @name = name
+    @city = city
+    @state = state
     @id
   end
 
@@ -13,9 +15,7 @@ class Course
 
   def self.all
     Database.execute("select name FROM courses order by name ASC").map do |row|
-      course = Course.new
-      course.name = row[0]
-      course
+      row[0]
     end
   end
 
@@ -55,17 +55,23 @@ class Course
 
   def save
     return false unless valid?
-    Database.execute("INSERT INTO courses (name) VALUES (?)", name)
+    Database.execute("INSERT INTO courses (name, city, state) VALUES (?, ?, ?)", name, city, state)
     @id = Database.execute("SELECT last_insert_rowid()")[0][0]
   end
 
   def valid?
     if name.nil? or name.empty? or /\d+$/.match(name)
       @errors = "\"#{name}\" is not a valid course name."
-      false
+      return false
+    elsif city.nil? or city.empty? or /\d+$/.match(city)
+      @errors = "\"#{city}\" is not a valid city name."
+      return false
+    elsif state.nil? or state.empty? or /\d+$/.match(state)
+      @errors = "\"#{state}\" is not a valid state name."
+      return false
     else
       @errors = nil
-      true
+      return true
     end
   end
 

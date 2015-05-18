@@ -6,19 +6,19 @@ describe CoursesController do
     let(:courses_controller) {CoursesController.new}
 
     it "should add a course" do
-      courses_controller.add("Anna Paige Park")
+      courses_controller.add("Anna Paige Park", "Rochester", "IL")
       assert_equal 1, Course.count
     end
 
     it "should not add a course name with all blanks" do
       course_name = "      "
-      result = courses_controller.add(course_name)
+      result = courses_controller.add(course_name, "Nowhere", "XX")
       assert_equal "\"\" is not a valid course name.", result
     end
 
     it "should not add a course name comprised of all numbers" do
       course_name = "5656565"
-      result = courses_controller.add(course_name)
+      result = courses_controller.add(course_name, "Nowhere", "XX")
       assert_equal "\"5656565\" is not a valid course name.", result
     end
 
@@ -27,7 +27,7 @@ describe CoursesController do
   describe ".remove" do
     let(:courses_controller) {CoursesController.new}
     before do
-      courses_controller.add("Rollin Ridge")
+      courses_controller.add("Rollin Ridge", "Madison", "WI")
     end
     it "should remove a course" do
       courses_controller.remove("Rollin Ridge")
@@ -44,7 +44,7 @@ describe CoursesController do
   describe ".update" do
     let(:courses_controller) {CoursesController.new}
     before do
-      courses_controller.add("Elver")
+      courses_controller.add("Elver", "Madison", "WI")
     end
     it "should ask for another name if the first is invalid" do
       assert_equal "  isn't a valid course name.\n", courses_controller.update(" ", "Elver")
@@ -57,7 +57,7 @@ describe CoursesController do
   describe ".complete" do
     let(:courses_controller) { CoursesController.new }
     before do
-      courses_controller.add("Elver")
+      courses_controller.add("Elver", "Madison", "WI")
       courses_controller.complete("Elver", "Heavily wooded, but fun!")
     end
     it "should remove the course from the courses table" do

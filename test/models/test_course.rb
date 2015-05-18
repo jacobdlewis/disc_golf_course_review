@@ -17,7 +17,7 @@ describe Course do
       end
       it "should return the courses in alphabetical order" do
         expected = ["Rollin Ridge", "Seven Oaks Park"]
-        actual = Course.all.map { |course| course.name }
+        actual = Course.all.map { |course| course }
         assert_equal expected, actual
       end
     end
@@ -25,7 +25,7 @@ describe Course do
 
   describe "#getID" do
     it "should return the id of the course" do
-      course = Course.new("Seven Oaks Park").save
+      course = Course.new("Seven Oaks Park", "Nashville", "TN").save
       assert_equal course, Course.getID("Seven Oaks Park")
     end
   end
@@ -38,8 +38,8 @@ describe Course do
     end
     describe "if there are courses" do
       before do
-        Course.new("Seven Oaks Park").save
-        Course.new("Rollin Ridge").save
+        Course.new("Seven Oaks Park", "Nasvhille", "TN").save
+        Course.new("Rollin Ridge", "Nowhere", "WI").save
       end
       it "should return the correct count" do
         assert_equal 2, Course.count
@@ -55,8 +55,8 @@ describe Course do
     end
     describe "if the specified course does exist" do
       before do
-        Course.new("Seven Oaks Park").save
-        Course.new("Rollin Ridge").save
+        Course.new("Seven Oaks Park", "Nashville", "TN").save
+        Course.new("Rollin Ridge", "Nowhere", "WI").save
       end
       it "should return true when the course is deleted" do
         assert_equal true, Course.delete("Rollin Ridge")
@@ -67,14 +67,8 @@ describe Course do
   describe ".initialize" do
     describe "if a name is provided" do
       it "sets the name attribute" do
-        course = Course.new('foo')
+        course = Course.new('foo', "bar", "baz")
         assert_equal "foo", course.name
-      end
-    end
-    describe "if a name isn't provided" do
-      it "sets the name attribute to nil" do
-        course = Course.new()
-        assert_equal nil, course.name
       end
     end
   end
@@ -82,7 +76,7 @@ describe Course do
   describe "#insert" do
     describe "if the name isn't valid" do
       it "indicate that the name is invalid" do
-        course = Course.new("Elver")
+        course = Course.new("Elver", "Madison", "WI")
         course.save
         expected = "new name invalid"
         assert_equal expected, Course.insert("Elver", "")
@@ -93,14 +87,14 @@ describe Course do
     end
     describe "if the name is valid" do
       it "shouldn't update the model's ID" do
-        course = Course.new("Elver")
+        course = Course.new("Elver", "Madison", "WI")
         course.save
         id = course.id
         Course.insert("Elver", "Heistand")
         assert_equal id, Database.execute("Select id from courses where name like 'Heistand'")[0][0]
       end
       it "should update the model's name" do
-        course = Course.new("Elver")
+        course = Course.new("Elver", "Madison", "WI")
         course.save
         id = course.id
         Course.insert("Elver", "Heistand")
@@ -112,10 +106,8 @@ describe Course do
 
   describe ".save" do
     describe "if the model is valid" do
-      let(:course){ Course.new("Elver") }
+      let(:course){ Course.new("Elver", "Madison", "WI") }
       it "should return true" do
-        course.city = "Madison"
-        course.state = "WI"
         assert course.save
       end
       it "should save the model to the database" do
@@ -133,7 +125,7 @@ describe Course do
     end
 
     describe "with a previously invalid name" do
-      let(:course){ Course.new("666") }
+      let(:course){ Course.new("666", "Bad City", "NV") }
       before do
         refute course.valid?
         course.name = "Eat a pop tart"
@@ -151,7 +143,7 @@ describe Course do
 
   describe ".exists?" do
     before do
-      Course.new("Seven Oaks Park").save
+      Course.new("Seven Oaks Park", "Nashville", "TN").save
     end
     it "should return true if the course is in the courses table" do
       assert_equal true, Course.exists?("Seven Oaks Park")

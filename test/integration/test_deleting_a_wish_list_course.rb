@@ -2,7 +2,6 @@ require_relative '../test_helper'
 class TestDeletingWishListCourses < Minitest::Test
 
   def test_delete_a_course
-    Course.new("Seven Oaks Park")
     shell_output = ""
     expected_output = ""
     IO.popen('./disc_golf_course_tracker', 'r+') do |pipe|

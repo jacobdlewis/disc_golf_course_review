@@ -2,7 +2,6 @@ require_relative '../test_helper'
 class TestUpdatingWishListCourses < Minitest::Test
 
   def test_update_a_course_happy_path
-    Course.new("Seven Oaks Park")
     shell_output = ""
     expected_output = ""
     IO.popen('./disc_golf_course_tracker', 'r+') do |pipe|
@@ -40,7 +39,6 @@ class TestUpdatingWishListCourses < Minitest::Test
   end
 
   def test_update_a_course_sad_path
-    Course.new("Seven Oaks Park")
     shell_output = ""
     expected_output = ""
     IO.popen('./disc_golf_course_tracker', 'r+') do |pipe|

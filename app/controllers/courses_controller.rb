@@ -5,7 +5,7 @@ class CoursesController
       courses = Course.all # all of the courses in an array
       say("\nYour Wish List Courses are:\n")
       courses.each_with_index do |course, index|
-        say("#{index + 1}. #{course.name}")
+        say("#{index + 1}. #{course}")
       end
       say("\n")
       submenu
@@ -25,9 +25,11 @@ class CoursesController
     end
   end
 
-  def add(name)
+  def add(name, city, state)
     clean_name = name.strip
-    course = Course.new(clean_name)
+    clean_city = city.strip
+    clean_state = state.strip
+    course = Course.new(clean_name, clean_city, clean_state)
     if course.save
       "Thank you. #{name} has been added to your course Wish List."
     else
@@ -58,7 +60,7 @@ class CoursesController
     name = ask("What is the name of the course?")
     city = ask("In what city is the course located?")
     state = ask("In what state is the course located?")
-    response = add(name)
+    response = add(name, city, state)
     say(response) unless response.nil?
   end
 
