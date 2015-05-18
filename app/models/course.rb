@@ -29,6 +29,10 @@ class Course
     end
   end
 
+  def self.update(name, new_name)
+    nil
+  end
+
   def save
     return false unless valid?
     Database.execute("INSERT INTO courses (name) VALUES (?)", name)
