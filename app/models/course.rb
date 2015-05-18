@@ -19,8 +19,8 @@ class Course
     end
   end
 
-  def self.getID(name)
-    return Database.execute("SELECT id from courses WHERE name LIKE '%#{name}%'")[0][0]
+  def self.getCourseInfo(name)
+    return Database.execute("SELECT id, city, state from courses WHERE name LIKE '%#{name}%'")[0]
   end
 
   def self.exists?(name)

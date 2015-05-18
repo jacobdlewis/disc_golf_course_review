@@ -23,10 +23,10 @@ describe Course do
     end
   end
 
-  describe "#getID" do
-    it "should return the id of the course" do
+  describe "#getCourseInfo" do
+    it "should return the course_id, name, city of the course" do
       course = Course.new("Seven Oaks Park", "Nashville", "TN").save
-      assert_equal course, Course.getID("Seven Oaks Park")
+      assert_equal [course, "Nashville", "TN"], Course.getCourseInfo("Seven Oaks Park")
     end
   end
 

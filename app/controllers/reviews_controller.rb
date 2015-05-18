@@ -13,15 +13,18 @@ class ReviewsController
     end
   end
 
-  def add(name, course_id, comment)
-    Review.new(name, course_id, comment).save
+  def add(name, city, state, course_id, comment)
+    Review.new(name, city, state, course_id, comment).save
     "#{name} has been marked as complete"
   end
 
   def add_additional_review(name, comment)
     if Review.exists?(name)
-      course_id = Review.get_course_ID(name)
-      Review.new(name, course_id, comment).save
+      course_info = Review.get_course_info(name)
+      course_id = course_info[0]
+      city = course_info[1]
+      state = course_info[2]
+      Review.new(name, city, state, course_id, comment).save
       "\nNew review of #{name} added successfully."
     else
       "Course not found"

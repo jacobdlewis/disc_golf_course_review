@@ -1,12 +1,14 @@
 class Review
   attr_accessor :name
-  attr_reader :id
+  attr_reader :id, :course_id, :comment, :city, :state
 
-  def initialize(name, course_id, comment)
+  def initialize(name, city, state, course_id, comment)
     @name = name
-    @id
+    @city = city
+    @state = state
     @course_id = course_id
     @comment = comment
+    @id
   end
 
   def self.all
@@ -20,7 +22,7 @@ class Review
   end
 
   def save
-    Database.execute("INSERT INTO reviews (name, course_id, comment) VALUES (?, ?, ?)", @name, @course_id, @comment)
+    Database.execute("INSERT INTO reviews (name, city, state, course_id, comment) VALUES (?, ?, ?, ?, ?)", name, city, state, course_id, comment)
     @id = Database.execute("SELECT last_insert_rowid()")[0][0]
   end
 
@@ -33,9 +35,9 @@ class Review
     end
   end
 
-  def self.get_course_ID(name)
+  def self.get_course_info(name)
     if exists?(name)
-      return Database.execute("SELECT course_id from reviews WHERE name LIKE '%#{name}%'")[0][0]
+      return Database.execute("SELECT course_id, city, state from reviews WHERE name LIKE '%#{name}%'")[0]
     else
       return "ID not found"
     end
