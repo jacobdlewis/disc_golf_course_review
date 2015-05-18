@@ -18,11 +18,25 @@ class ReviewsController
     "#{name} has been marked as complete"
   end
 
+  def add_additional_review(name, comment)
+    if Review.exists?(name)
+      course_id = Review.get_course_ID(name)
+      Review.new(name, course_id, comment).save
+      "New review of #{name} added successfully."
+    else
+      "Course not found"
+    end
+  end
+
   def submenu_prompt
     choose do |submenu|
     submenu.prompt = ""
     say("Would you like to...\n")
-    submenu.choice("Add a review to a course") {}
+    submenu.choice("Add a review to a course") {
+      course = ask("What is the name of the course you want to review?")
+      comment = ask("Please add a brief review for #{course}")
+      say(ReviewsController.new.add_additional_review(course, comment))
+    }
     submenu.choice("Return to main menu") {}
     end
   end

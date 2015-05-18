@@ -46,4 +46,5 @@ class TestMarkingCourseComplete < Minitest::Test
     end
     assert_equal expected_output, shell_output
   end
+
 end

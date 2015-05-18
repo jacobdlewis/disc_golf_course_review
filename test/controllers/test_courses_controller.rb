@@ -54,5 +54,17 @@ describe CoursesController do
     end
   end
 
+  describe ".complete" do
+    let(:courses_controller) { CoursesController.new }
+    before do
+      courses_controller.add("Elver")
+      courses_controller.complete("Elver", "Heavily wooded, but fun!")
+    end
+    it "should remove the course from the courses table" do
+      assert_equal 0, Course.count
+      assert_equal 1, Review.count
+    end
+  end
+
 
 end

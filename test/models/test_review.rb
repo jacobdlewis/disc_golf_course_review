@@ -57,4 +57,26 @@ describe Review do
     end
   end
 
+  describe "#get_course_ID" do
+    it "should return the course_id of the named course" do
+      Review.new("Seven Oaks Park", 23, "Awesome!").save
+      assert_equal 23, Review.get_course_ID("Seven Oaks Park")
+    end
+    it "should return an error message if the id doesn't exist" do
+      Review.new("Elver Park", 14, "Amazing! Huzzah!").save
+      assert_equal "ID not found", Review.get_course_ID("Spanish Moss Course")
+    end
+  end
+
+  describe "#exists?" do
+    it  "should return true if the named course exists" do
+      Review.new("Seven Oaks Park", 23, "Awesome!").save
+      assert_equal true, Review.exists?("Seven Oaks Park")
+    end
+    it "should return false if the named course doesn't exist" do
+      Review.new("Seven Oaks Park", 23, "Awesome!").save
+      assert_equal false, Review.exists?("Ocean Salty Park")
+    end
+  end
+
 end

@@ -24,6 +24,23 @@ class Review
     @id = Database.execute("SELECT last_insert_rowid()")[0][0]
   end
 
+  def self.exists?(name)
+    result = Database.execute("SELECT count(name) FROM reviews WHERE name LIKE '%#{name}%'")[0][0]
+    if result > 0
+      return true
+    else
+      return false
+    end
+  end
+
+  def self.get_course_ID(name)
+    if exists?(name)
+      return Database.execute("SELECT course_id from reviews WHERE name LIKE '%#{name}%'")[0][0]
+    else
+      return "ID not found"
+    end
+  end
+
   def valid?
     if name.nil? or name.empty? or /\d+$/.match(name)
       @errors = "\"#{name}\" is not a valid course name."
