@@ -22,7 +22,7 @@ class ReviewsController
     if Review.exists?(name)
       course_id = Review.get_course_ID(name)
       Review.new(name, course_id, comment).save
-      "New review of #{name} added successfully."
+      "\nNew review of #{name} added successfully."
     else
       "Course not found"
     end
@@ -34,7 +34,7 @@ class ReviewsController
     say("Would you like to...\n")
     submenu.choice("Add a review to a course") {
       course = ask("What is the name of the course you want to review?")
-      comment = ask("Please add a brief review for #{course}")
+      comment = ask("Please add a brief review for #{course}.")
       say(ReviewsController.new.add_additional_review(course, comment))
     }
     submenu.choice("Return to main menu") {}
