@@ -20,7 +20,8 @@ elsif ARGV.length == 0
         courses_controller.index }
       menu.choice("View your played courses") {
         reviews_controller = ReviewsController.new
-        reviews_controller.index }
+        reviews_controller.index
+        reviews_controller.submenu_prompt }
       menu.choice("Exit") {
         say("Goodbye!")
         exit

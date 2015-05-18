@@ -40,6 +40,7 @@ class CoursesController
       id = Course.getID(name)
       Review.new(name, id, comment).save
       Course.delete(name)
+      "#{name} was successfully marked as completed."
     else
       "Course not found"
     end
@@ -79,7 +80,7 @@ private
       submenu.choice("Mark a course as complete") {
         course = ask("Which course would you like to mark as complete?")
         comment = ask("Please enter a quick review of the course.")
-        CoursesController.new.complete(course, comment)
+        say(CoursesController.new.complete(course, comment))
       }
       submenu.choice("Return to main menu") {}
     end

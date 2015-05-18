@@ -18,4 +18,13 @@ class ReviewsController
     "#{name} has been marked as complete"
   end
 
+  def submenu_prompt
+    choose do |submenu|
+    submenu.prompt = ""
+    say("Would you like to...\n")
+    submenu.choice("Add a review to a course") {}
+    submenu.choice("Return to main menu") {}
+    end
+  end
+
 end

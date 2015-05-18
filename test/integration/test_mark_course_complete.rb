@@ -33,6 +33,11 @@ class TestMarkingCourseComplete < Minitest::Test
       pipe.puts "Token Creek"
       expected_output << "Please enter a quick review of the course.\n"
       pipe.puts "Great Course!"
+      expected_output << "Token Creek was successfully marked as completed.\n"
+      expected_output << main_menu
+      pipe.puts "3"
+      expected_output << "\nYour Completed Courses are:\n1. Token Creek\n\nWould you like to...\n1. Add a review to a course\n2. Return to main menu\n"
+      pipe.puts "2"
       expected_output << main_menu
       pipe.puts "4"
       expected_output << "Goodbye!\n"
