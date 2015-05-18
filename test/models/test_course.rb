@@ -7,7 +7,7 @@ describe Course do
         assert_equal [], Course.all
       end
     end
-    describe "if there are scenarios" do
+    describe "if there are courses" do
       before do
         create_course("Seven Oaks Park", "Nashville", "TN", "3457 School Ln", "37217", "21", "free");
         create_course("Rollin Ridge", "Baraboo", "WI", "333 Nowheresville", "53234", "36", "paid - $5");
@@ -23,13 +23,20 @@ describe Course do
     end
   end
 
+  describe "#getID" do
+    it "should return the id of the course" do
+      course = Course.new("Seven Oaks Park").save
+      assert_equal course, Course.getID("Seven Oaks Park")
+    end
+  end
+
   describe "#count" do
     describe "if there are no courses in the database" do
       it "should return 0" do
         assert_equal 0, Course.count
       end
     end
-    describe "if there are scenarios" do
+    describe "if there are courses" do
       before do
         Course.new("Seven Oaks Park").save
         Course.new("Rollin Ridge").save
@@ -125,23 +132,32 @@ describe Course do
       end
     end
 
-  describe "with a previously invalid name" do
-    let(:course){ Course.new("666") }
-    before do
-      refute course.valid?
-      course.name = "Eat a pop tart"
-      assert_equal "Eat a pop tart", course.name
-    end
-    it "should return true" do
-      assert course.valid?
-    end
-    it "should not have an error message" do
-      course.valid?
-      assert_nil course.errors
+    describe "with a previously invalid name" do
+      let(:course){ Course.new("666") }
+      before do
+        refute course.valid?
+        course.name = "Eat a pop tart"
+        assert_equal "Eat a pop tart", course.name
+      end
+      it "should return true" do
+        assert course.valid?
+      end
+      it "should not have an error message" do
+        course.valid?
+        assert_nil course.errors
+      end
     end
   end
 
-end
-
-
+  describe ".exists?" do
+    before do
+      Course.new("Seven Oaks Park").save
+    end
+    it "should return true if the course is in the courses table" do
+      assert_equal true, Course.exists?("Seven Oaks Park")
+    end
+    it "should return false if the course isn't in the courses table" do
+      assert_equal false, Course.exists?("Eagle Ridge Bluff Park")
+    end
+  end
 end

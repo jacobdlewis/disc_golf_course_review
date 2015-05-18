@@ -19,6 +19,19 @@ class Course
     end
   end
 
+  def self.getID(name)
+    return Database.execute("SELECT id from courses WHERE name LIKE '%#{name}%'")[0][0]
+  end
+
+  def self.exists?(name)
+    result = Database.execute("SELECT count(name) FROM courses WHERE name LIKE '%#{name}%'")[0][0]
+    if result > 0
+      return true
+    else
+      return false
+    end
+  end
+
   def self.delete(name)
     course = Database.execute("select name FROM courses WHERE name LIKE '%#{name}%'")
     if course == []

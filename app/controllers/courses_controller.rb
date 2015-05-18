@@ -35,6 +35,16 @@ class CoursesController
     end
   end
 
+  def complete(name, comment)
+    if Course.exists?(name)
+      id = Course.getID(name)
+      Review.new(name, id, comment).save
+      Course.delete(name)
+    else
+      "Course not found"
+    end
+  end
+
   def remove(name)
     if Course.delete(name)
       "#{name} was deleted successfully"
@@ -67,7 +77,9 @@ private
         say(CoursesController.new.remove(course))
       }
       submenu.choice("Mark a course as complete") {
-        course = ask("Which course wouldyou like to mark as complete?")
+        course = ask("Which course would you like to mark as complete?")
+        comment = ask("Please enter a quick review of the course.")
+        CoursesController.new.complete(course, comment)
       }
       submenu.choice("Return to main menu") {}
     end

@@ -8,11 +8,17 @@ CREATE TABLE IF NOT EXISTS courses (
   id integer PRIMARY KEY AUTOINCREMENT,
   name varchar(100) NOT NULL,
   city varchar(100),
+  state varchar(25)
+  );
+SQL
+    Database.execute <<-SQL
+CREATE TABLE IF NOT EXISTS reviews (
+  id integer PRIMARY KEY AUTOINCREMENT,
+  name varchar(100) NOT NULL,
+  city varchar(100),
   state varchar(25),
-  address varchar(100),
-  zip varchar(20),
-  holes varchar(10),
-  paid varchar(10)
+  course_id integer NOT NULL,
+  comment varchar(500)
   );
 SQL
   end

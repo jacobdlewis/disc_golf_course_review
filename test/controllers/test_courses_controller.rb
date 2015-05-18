@@ -5,7 +5,7 @@ describe CoursesController do
   describe ".add" do
     let(:courses_controller) {CoursesController.new}
 
-    it "should add a scenario" do
+    it "should add a course" do
       courses_controller.add("Anna Paige Park")
       assert_equal 1, Course.count
     end
@@ -29,7 +29,7 @@ describe CoursesController do
     before do
       courses_controller.add("Rollin Ridge")
     end
-    it "should remove a scenario" do
+    it "should remove a course" do
       courses_controller.remove("Rollin Ridge")
       assert_equal 0, Course.count
     end
