@@ -14,6 +14,17 @@ class CoursesController
     end
   end
 
+  def update(current_name, new_name)
+    if Course.insert(current_name, new_name) == "original name invalid"
+      return "#{current_name} isn't a valid course name.\n"
+    elsif Course.insert(current_name, new_name) == "new name invalid"
+      return "#{new_name} isn't a valid name.\n"
+    else
+      Course.insert(current_name, new_name)
+      return "Thank you. #{current_name} is now stored as #{new_name}."
+    end
+  end
+
   def add(name)
     clean_name = name.strip
     course = Course.new(clean_name)
@@ -48,6 +59,8 @@ private
       say("Would you like to...\n")
       submenu.choice("Update a course") {
         course = ask("What is the name of the course you'd like to update?")
+        new_course = ask("What is the new name for #{course}?")
+        say(CoursesController.new.update(course, new_course))
       }
       submenu.choice("Delete a course") {
         course = ask("What is the name of the course you'd like to delete?", String) { |q| q.validate = /\w/}

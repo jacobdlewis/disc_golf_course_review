@@ -72,37 +72,33 @@ describe Course do
     end
   end
 
-  describe "#update" do
+  describe "#insert" do
     describe "if the name isn't valid" do
-      it "should ask for a name again" do
+      it "indicate that the name is invalid" do
         course = Course.new("Elver")
         course.save
-        expected = "That name isn't valid. What is the name of the course you'd like to update?\n"
-        assert_equal expected, Course.update("Elver", "")
+        expected = "new name invalid"
+        assert_equal expected, Course.insert("Elver", "")
+        assert_equal expected, Course.insert("Elver", nil)
+        assert_equal expected, Course.insert("Elver", "%$adkf#")
       end
-      it "should ask for a name again" do
-        course = Course.new("Elver")
-        course.save
-        expected = "That name isn't valid. What is the name of the course you'd like to update?\n"
-        assert_equal expected, Course.update("Elver", "%$^&#*")
-      end
+
     end
     describe "if the name is valid" do
       it "shouldn't update the model's ID" do
         course = Course.new("Elver")
         course.save
         id = course.id
-        Course.update("Elver", "Heistand")
+        Course.insert("Elver", "Heistand")
         assert_equal id, Database.execute("Select id from courses where name like 'Heistand'")[0][0]
       end
       it "should update the model's name" do
         course = Course.new("Elver")
         course.save
-        name = course.name
         id = course.id
-        Course.update("Elver", "Heistand")
+        Course.insert("Elver", "Heistand")
         assert_equal id, Database.execute("Select id from courses where name like 'Heistand'")[0][0]
-        assert_equal name, Database.execute("Select name from courses where name like 'Heistand'")[0][1]
+        assert_equal 'Heistand', Database.execute("Select name from courses where name like 'Heistand'")[0][0]
       end
     end
   end

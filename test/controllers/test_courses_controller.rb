@@ -41,5 +41,18 @@ describe CoursesController do
     end
   end
 
+  describe ".update" do
+    let(:courses_controller) {CoursesController.new}
+    before do
+      courses_controller.add("Elver")
+    end
+    it "should ask for another name if the first is invalid" do
+      assert_equal "  isn't a valid course name.\n", courses_controller.update(" ", "Elver")
+    end
+    it "should confirm that the name was updated" do
+      assert_equal "Thank you. Elver is now stored as Heistand.", courses_controller.update("Elver", "Heistand")
+    end
+  end
+
 
 end
