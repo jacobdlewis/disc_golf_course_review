@@ -36,8 +36,8 @@ class TestAddingAdditionalReview < Minitest::Test
       expected_output << "Token Creek was successfully marked as completed.\n"
       expected_output << main_menu
       pipe.puts "3"
-      expected_output << "\nCompleted Courses:\n\n1. Token Creek (Madison, WI) Reviews: 1\n\nWould you like to...\n1. Add a review to a course\n2. Return to main menu\n"
-      pipe.puts "1"
+      expected_output << "\nCompleted Courses:\n\n1. Token Creek (Madison, WI) Reviews: 1\n\nWould you like to...\n1. See all reviews for a course\n2. Add a review to a course\n3. Return to main menu\n"
+      pipe.puts "2"
       expected_output << "What is the name of the course you want to review?\n"
       pipe.puts "Token Creek"
       expected_output << "Please add a brief review for Token Creek.\n"

@@ -34,6 +34,7 @@ class ReviewsController
     choose do |submenu|
     submenu.prompt = ""
     say("Would you like to...\n")
+    submenu.choice("See all reviews for a course") { }
     submenu.choice("Add a review to a course") {
       course = ask("What is the name of the course you want to review?")
       comment = ask("Please add a brief review for #{course}.")
