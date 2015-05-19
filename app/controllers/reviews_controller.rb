@@ -5,7 +5,7 @@ class ReviewsController
       reviews = Review.get_courses_and_review_count # all of the courses in an array
       say("\nCompleted Courses:\n\n")
       reviews.each_with_index do |review, index|
-        say("#{index + 1}. #{review[0]} (#{review[1]}, #{review[2]}) Reviews: #{review[3]}\n")
+        say("#{index + 1}. #{review[0]} (#{review[1]}, #{review[2]}) Reviews: #{review[3]}\n\n")
       end
     else
       say("No courses found. Add a course.\n")
