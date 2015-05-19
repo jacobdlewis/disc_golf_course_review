@@ -8,20 +8,18 @@ describe Course do
       end
     end
     describe "if there are courses" do
+      before do
         course_1 = Course.new("Seven Oaks Park", "Nashville", "TN")
         course_1.save
         course_2 = Course.new("Rollin Ridge", "Baraboo", "WI")
         course_2.save
+      end
       it "should return an array" do
         assert_equal Array, Course.all.class
       end
       it "should return the courses in alphabetical order" do
-        course_1 = Course.new("Seven Oaks Park", "Nashville", "TN")
-        course_1.save
-        course_2 = Course.new("Rollin Ridge", "Baraboo", "WI")
-        course_2.save
-        expected = [[course_2.name, course_2.city, course_2.state],
-                    [course_1.name, course_1.city, course_1.state]]
+        expected = [["Rollin Ridge", "Baraboo", "WI"],
+                    ["Seven Oaks Park", "Nashville", "TN"]]
         actual = Course.all
         actual[0].shift
         actual[1].shift

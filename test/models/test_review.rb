@@ -37,7 +37,9 @@ describe Review do
         expected = [["Rollin Ridge", "Nowhere", "WI", 2, "One of the best!"], ["Seven Oaks Park", "Nashville", "TN", 1, "Great course!"]]
         actual = Review.all
         actual[0].shift
+        actual[0].pop
         actual[1].shift
+        actual[1].pop
         assert_equal expected, actual
       end
     end

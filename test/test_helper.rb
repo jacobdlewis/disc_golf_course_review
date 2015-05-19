@@ -22,23 +22,7 @@ end
 
 class Minitest::Test
   def setup
-    Database.execute <<-SQL
-  CREATE TABLE IF NOT EXISTS courses (
-    id integer PRIMARY KEY AUTOINCREMENT,
-    name varchar(100) NOT NULL,
-    city varchar(100),
-    state varchar(25));
-  SQL
-    Database.execute <<-SQL
-  CREATE TABLE IF NOT EXISTS reviews (
-    id integer PRIMARY KEY AUTOINCREMENT,
-    name varchar(100) NOT NULL,
-    city varchar(100),
-    state varchar(25),
-    course_id integer NOT NULL,
-    comment varchar(500)
-    );
-  SQL
+    Database.load_structure
     Database.execute("DELETE FROM courses;")
     Database.execute("DELETE FROM reviews;")
   end
