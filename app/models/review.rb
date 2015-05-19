@@ -12,8 +12,8 @@ class Review
   end
 
   def self.all
-    Database.execute("select name FROM reviews order by name ASC").map do |row|
-      row[0]
+    Database.execute("select * FROM reviews order by name ASC").map do |row|
+      row
     end
   end
 

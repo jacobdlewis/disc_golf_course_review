@@ -28,14 +28,16 @@ describe Review do
     describe "if there are courses" do
       before do
         Review.new("Seven Oaks Park", "Nashville", "TN", 1, "Great course!" ).save
-        Review.new("Rollin Ridge", "Nowhere", "WI", 2, "One of the Best!").save
+        Review.new("Rollin Ridge", "Nowhere", "WI", 2, "One of the best!").save
       end
       it "should return an array" do
         assert_equal Array, Review.all.class
       end
       it "should return the courses in alphabetical order" do
-        expected = ["Rollin Ridge", "Seven Oaks Park"]
+        expected = [["Rollin Ridge", "Nowhere", "WI", 2, "One of the best!"], ["Seven Oaks Park", "Nashville", "TN", 1, "Great course!"]]
         actual = Review.all
+        actual[0].shift
+        actual[1].shift
         assert_equal expected, actual
       end
     end
