@@ -1,6 +1,6 @@
 class Review
   attr_accessor :name
-  attr_reader :id, :course_id, :comment, :city, :state
+  attr_reader :id, :course_id, :comment, :city, :state, :completion_date
 
   def initialize(name, city, state, course_id, comment)
     @name = name
@@ -11,8 +11,8 @@ class Review
     @id
   end
 
-  def self.all
-    Database.execute("select * FROM reviews order by name ASC").map do |row|
+  def self.get_courses_and_review_count
+    Database.execute("select name, city, state, count(id), completion_date FROM reviews group by course_id order by completion_date asc").map do |row|
       row
     end
   end

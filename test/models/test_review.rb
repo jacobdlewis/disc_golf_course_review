@@ -19,10 +19,10 @@ describe Review do
     end
   end
 
-  describe "#all" do
+  describe "#get_courses_and_review_count" do
     describe "if there are no courses in the database" do
       it "should return an empty array" do
-        assert_equal [], Review.all
+        assert_equal [], Review.get_courses_and_review_count
       end
     end
     describe "if there are courses" do
@@ -31,14 +31,12 @@ describe Review do
         Review.new("Rollin Ridge", "Nowhere", "WI", 2, "One of the best!").save
       end
       it "should return an array" do
-        assert_equal Array, Review.all.class
+        assert_equal Array, Review.get_courses_and_review_count.class
       end
       it "should return the courses in alphabetical order" do
-        expected = [["Rollin Ridge", "Nowhere", "WI", 2, "One of the best!"], ["Seven Oaks Park", "Nashville", "TN", 1, "Great course!"]]
-        actual = Review.all
-        actual[0].shift
+        expected = [["Seven Oaks Park", "Nashville", "TN", 1],["Rollin Ridge", "Nowhere", "WI", 1]]
+        actual = Review.get_courses_and_review_count
         actual[0].pop
-        actual[1].shift
         actual[1].pop
         assert_equal expected, actual
       end

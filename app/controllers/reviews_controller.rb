@@ -2,13 +2,11 @@ class ReviewsController
 
   def index
     if Review.count > 0
-      reviews = Review.all # all of the courses in an array
-      say("\nYour Completed Courses are:\n")
+      reviews = Review.get_courses_and_review_count # all of the courses in an array
+      say("\nCompleted Courses:\n\n")
       reviews.each_with_index do |review, index|
-        review = Review.new(review[1], review[2], review[3], review[4], review[5])
-        say("#{index + 1}. #{review.name} (#{review.city}, #{review.state}) Review: #{review.comment}")
+        say("#{index + 1}. #{review[0]} (#{review[1]}, #{review[2]}) Reviews: #{review[3]}\n")
       end
-      say("\n")
     else
       say("No courses found. Add a course.\n")
     end
