@@ -5,7 +5,8 @@ class CoursesController
       courses = Course.all # all of the courses in an array
       say("\nYour Wish List Courses are:\n")
       courses.each_with_index do |course, index|
-        say("#{index + 1}. #{course}")
+        course = Course.new(course[1],course[2],course[3])
+        say("#{index + 1}. #{course.name} (#{course.city}, #{course.state})")
       end
       say("\n")
       submenu

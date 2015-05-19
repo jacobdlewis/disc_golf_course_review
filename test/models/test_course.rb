@@ -8,16 +8,23 @@ describe Course do
       end
     end
     describe "if there are courses" do
-      before do
-        create_course("Seven Oaks Park", "Nashville", "TN", "3457 School Ln", "37217", "21", "free");
-        create_course("Rollin Ridge", "Baraboo", "WI", "333 Nowheresville", "53234", "36", "paid - $5");
-      end
+        course_1 = Course.new("Seven Oaks Park", "Nashville", "TN")
+        course_1.save
+        course_2 = Course.new("Rollin Ridge", "Baraboo", "WI")
+        course_2.save
       it "should return an array" do
         assert_equal Array, Course.all.class
       end
       it "should return the courses in alphabetical order" do
-        expected = ["Rollin Ridge", "Seven Oaks Park"]
-        actual = Course.all.map { |course| course }
+        course_1 = Course.new("Seven Oaks Park", "Nashville", "TN")
+        course_1.save
+        course_2 = Course.new("Rollin Ridge", "Baraboo", "WI")
+        course_2.save
+        expected = [[course_2.name, course_2.city, course_2.state],
+                    [course_1.name, course_1.city, course_1.state]]
+        actual = Course.all
+        actual[0].shift
+        actual[1].shift
         assert_equal expected, actual
       end
     end

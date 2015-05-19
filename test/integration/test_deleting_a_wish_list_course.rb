@@ -16,7 +16,7 @@ class TestDeletingWishListCourses < Minitest::Test
       expected_output << "Thank you. Seven Oaks Park has been added to your course Wish List.\n"
       expected_output << main_menu
       pipe.puts "2"
-      expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park\n"
+      expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park (Nashville, TN)\n"
       expected_output << view_courses_submenu
       pipe.puts "2"
       expected_output << "What is the name of the course you'd like to delete?\n"
@@ -49,7 +49,7 @@ class TestDeletingWishListCourses < Minitest::Test
       expected_output << "Thank you. Seven Oaks Park has been added to your course Wish List.\n"
       expected_output << main_menu
       pipe.puts "2"
-      expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park\n"
+      expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park (Nashville, TN)\n"
       expected_output << view_courses_submenu
       pipe.puts "2"
       expected_output << "What is the name of the course you'd like to delete?\n"

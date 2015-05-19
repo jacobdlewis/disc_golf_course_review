@@ -20,13 +20,13 @@ class TestAddingAdditionalReview < Minitest::Test
       expected_output << "What is the name of the course?\n"
       pipe.puts "Token Creek"
       expected_output << "In what city is the course located?\n"
-      pipe.puts "Nashville"
+      pipe.puts "Madison"
       expected_output << "In what state is the course located?\n"
-      pipe.puts "TN"
+      pipe.puts "WI"
       expected_output << "Thank you. Token Creek has been added to your course Wish List.\n"
       expected_output << main_menu
       pipe.puts "2"
-      expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park\n2. Token Creek\n"
+      expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park (Nashville, TN)\n2. Token Creek (Madison, WI)\n"
       expected_output << view_courses_submenu
       pipe.puts "3"
       expected_output << "Which course would you like to mark as complete?\n"

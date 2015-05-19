@@ -14,8 +14,8 @@ class Course
   end
 
   def self.all
-    Database.execute("select name FROM courses order by name ASC").map do |row|
-      row[0]
+    Database.execute("select * FROM courses order by name ASC").map do |row|
+      row
     end
   end
 

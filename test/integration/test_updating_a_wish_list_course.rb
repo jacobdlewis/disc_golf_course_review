@@ -16,7 +16,7 @@ class TestUpdatingWishListCourses < Minitest::Test
       expected_output << "Thank you. Seven Oaks Park has been added to your course Wish List.\n"
       expected_output << main_menu
       pipe.puts "2"
-      expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park\n"
+      expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park (Nashville, TN)\n"
       expected_output << view_courses_submenu
       pipe.puts "1"
       expected_output << "What is the name of the course you'd like to update?\n"
@@ -26,7 +26,7 @@ class TestUpdatingWishListCourses < Minitest::Test
       expected_output << "Thank you. Seven Oaks Park is now stored as Elver Park.\n"
       expected_output << main_menu
       pipe.puts "2"
-      expected_output << "\nYour Wish List Courses are:\n1. Elver Park\n"
+      expected_output << "\nYour Wish List Courses are:\n1. Elver Park (Nashville, TN)\n"
       expected_output << view_courses_submenu
       pipe.puts "4"
       expected_output << main_menu
@@ -53,7 +53,7 @@ class TestUpdatingWishListCourses < Minitest::Test
       expected_output << "Thank you. Seven Oaks Park has been added to your course Wish List.\n"
       expected_output << main_menu
       pipe.puts "2"
-      expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park\n"
+      expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park (Nashville, TN)\n"
       expected_output << view_courses_submenu
       pipe.puts "1"
       expected_output << "What is the name of the course you'd like to update?\n"
@@ -63,7 +63,7 @@ class TestUpdatingWishListCourses < Minitest::Test
       expected_output << "***** isn't a valid name.\n"
       expected_output << main_menu
       pipe.puts "2"
-      expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park\n"
+      expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park (Nashville, TN)\n"
       expected_output << view_courses_submenu
       pipe.puts "4"
       expected_output << main_menu
