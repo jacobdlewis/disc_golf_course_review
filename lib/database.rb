@@ -18,7 +18,8 @@ CREATE TABLE IF NOT EXISTS reviews (
   city varchar(100),
   state varchar(25),
   course_id integer NOT NULL,
-  comment varchar(500)
+  comment varchar(500),
+  completion_date datetime DEFAULT CURRENT_TIMESTAMP
   );
 SQL
   end
