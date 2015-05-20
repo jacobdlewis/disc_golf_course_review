@@ -173,3 +173,31 @@ In order to keep track of the courses they've played, the user should be able to
 
 * A list of completed courses appears when the user selects "View your played courses"
 * The user can see instances/games of that course by entering its name
+
+##View User Stats
+In order to get a sense of how they're using the program, the user can see high level stats about their stored data.
+
+###Usage Example
+>./disc_golf_course_tracker
+>
+>1. Add a course to your Wish List
+>2. View your course Wish List
+>3. View your played courses
+>4. See your stats
+>5. Exit
+>
+>4
+>
+>User Stats:
+>
+> \* You have written 6 reviews
+>
+> \* You have 5 Wish List courses
+>
+> \* Most of your completed courses are in WI (2 courses)
+>
+> \* Most of your Wish List courses are in TN (3 courses)
+
+###Acceptance Criterea
+
+* A list of stats about program usage appears when the user selects "See your stats" from the main menu
