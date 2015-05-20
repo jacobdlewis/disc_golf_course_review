@@ -32,6 +32,7 @@ class ReviewsController
   end
 
   def add_additional_review(name, comment)
+    return "Course not found" if name == "" || name.nil?
     if Review.exists?(name)
       course_info = Review.get_course_info(name)
       course_id = course_info[0]
@@ -59,7 +60,7 @@ class ReviewsController
       say(ReviewsController.new.show_reviews(course))
     }
     submenu.choice("Add a review to a course") {
-      course = ask("What is the name of the course you want to review?")
+      course = ask("What is the name of the course you want to review?", String)
       comment = ask("Please add a brief review for #{course}.")
       say(ReviewsController.new.add_additional_review(course, comment))
     }

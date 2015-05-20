@@ -15,6 +15,11 @@ describe CoursesController do
       reviews_controller.add_additional_review("Lisbon Park", "Fabulous")
       assert_equal 2, Review.count
     end
+    describe "with bad input" do
+      it "should return Course not found" do
+        assert_equal "Course not found", reviews_controller.add_additional_review("", "Great")
+      end
+    end
   end
   describe ".show_reviews" do
     let(:reviews_controller) {ReviewsController.new}
