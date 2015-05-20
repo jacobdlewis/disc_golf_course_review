@@ -41,12 +41,13 @@ class CoursesController
   def complete(name, comment)
     if Course.exists?(name)
       courseInfo = Course.getCourseInfo(name)
-      course_id = courseInfo[0]
-      city = courseInfo[1]
-      state = courseInfo[2]
-      Review.new(name, city, state, course_id, comment).save
+      course_name = courseInfo[0]
+      course_id = courseInfo[1]
+      city = courseInfo[2]
+      state = courseInfo[3]
+      Review.new(course_name, city, state, course_id, comment).save
       Course.delete(name)
-      "#{name} was successfully marked as completed."
+      "#{course_name} was successfully marked as completed."
     else
       "Course not found"
     end

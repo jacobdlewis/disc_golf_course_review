@@ -80,6 +80,11 @@ describe CoursesController do
         assert_equal "Course not found", response
         assert_equal 1, course_count
       end
+      it "should not add a review to the reviews table" do
+        review_count = Review.count
+        courses_controller.complete("nonsense course", "doesn't exist")
+        assert_equal review_count, Review.count
+      end
     end
     describe "when the course name is bad input" do
       describe "when the name is blank" do

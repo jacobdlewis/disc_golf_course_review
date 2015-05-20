@@ -30,8 +30,10 @@ describe Course do
 
   describe "#getCourseInfo" do
     it "should return the course_id, name, city of the course" do
-      course = Course.new("Seven Oaks Park", "Nashville", "TN").save
-      assert_equal [course, "Nashville", "TN"], Course.getCourseInfo("Seven Oaks Park")
+      Course.new("Seven Oaks Park", "Nashville", "TN").save
+      actual_without_id = Course.getCourseInfo("Seven Oaks Park")
+      actual_without_id.delete_at(1)
+      assert_equal ["Seven Oaks Park", "Nashville", "TN"], actual_without_id
     end
   end
 
@@ -155,6 +157,17 @@ describe Course do
     end
     it "should return false if the course isn't in the courses table" do
       assert_equal false, Course.exists?("Eagle Ridge Bluff Park")
+    end
+    describe "if the input is bad" do
+      it "should return false for empty string" do
+        assert_equal false, Course.exists?("")
+      end
+      it "should return false for nil" do
+        assert_equal false, Course.exists?(nil)
+      end
+      it "should return false for non-word characters" do
+        assert_equal false, Course.exists?("$$%()$*()*:JSLKFJS:;SLdfkjSelect*From courses;")
+      end
     end
   end
 end

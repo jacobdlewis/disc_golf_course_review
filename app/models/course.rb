@@ -20,15 +20,18 @@ class Course
   end
 
   def self.getCourseInfo(name)
-    return Database.execute("SELECT id, city, state from courses WHERE name LIKE '%#{name}%'")[0]
+    return Database.execute("SELECT name, id, city, state from courses WHERE name LIKE '%#{name}%'")[0]
   end
 
   def self.exists?(name)
-    result = Database.execute("SELECT count(name) FROM courses WHERE name LIKE '%#{name}%'")[0][0]
-    if result > 0
-      return true
+    return false if name == "" || name.nil?
+    clean_name = name
+    clean_name.gsub!(/[!@#$%^&*(){}:;'"]/, "")
+    result = Database.execute("SELECT * FROM courses WHERE name LIKE '%#{clean_name}%'")
+    if result == []
+      false
     else
-      return false
+      true
     end
   end
 
