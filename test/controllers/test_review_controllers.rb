@@ -16,4 +16,15 @@ describe CoursesController do
       assert_equal 2, Review.count
     end
   end
+  describe ".show_reviews" do
+    let(:reviews_controller) {ReviewsController.new}
+    before do
+      Review.new("Rollin Ridge", "Nowhere", "WI", 2, "One of the Best!").save
+      Review.new("Rollin Ridge", "Nowhere", "WI", 2, "Lots of bugs today, but the grass was freshly mowed.").save
+    end
+    it "should format a list of reviews & timestamps for a given course" do
+      expected = "\nReviews for Rollin Ridge:\n\nMay 19, 2015 - One of the Best!\n\nMay 19, 2015 - Lots of bugs today, but the grass was freshly mowed.\n\n"
+      assert_equal expected, reviews_controller.show_reviews("Rollin Ridge")
+    end
+  end
 end

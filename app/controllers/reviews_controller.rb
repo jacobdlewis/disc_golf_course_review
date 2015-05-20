@@ -12,6 +12,15 @@ class ReviewsController
     end
   end
 
+  def show_reviews(course)
+    reviews = Review.get_reviews(course)
+    result = "\nReviews for #{reviews[0][0]}:\n\n"
+    reviews.each_with_index do |review, index|
+      result << "#{Date.parse(review[4]).strftime('%B %d, %Y')} - #{review[3]}\n\n"
+    end
+    result
+  end
+
   def add(name, city, state, course_id, comment)
     Review.new(name, city, state, course_id, comment).save
     "#{name} has been marked as complete"
@@ -34,7 +43,10 @@ class ReviewsController
     choose do |submenu|
     submenu.prompt = ""
     say("Would you like to...\n")
-    submenu.choice("See all reviews for a course") { }
+    submenu.choice("See all reviews for a course") {
+      course = ask("What is the name of the course for which you want to see reviews?")
+      say(ReviewsController.new.show_reviews(course))
+    }
     submenu.choice("Add a review to a course") {
       course = ask("What is the name of the course you want to review?")
       comment = ask("Please add a brief review for #{course}.")

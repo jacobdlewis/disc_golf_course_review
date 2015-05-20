@@ -17,6 +17,14 @@ class Review
     end
   end
 
+  def self.get_reviews(course_name)
+    if exists?(course_name)
+      Database.execute("SELECT name, city, state, comment, completion_date FROM reviews WHERE name like \"%#{course_name}%\" order by completion_date asc")
+    else
+      return "Course not found"
+    end
+  end
+
   def self.count
     Database.execute("select count(id) FROM reviews")[0][0]
   end
@@ -27,7 +35,9 @@ class Review
   end
 
   def self.exists?(name)
-    result = Database.execute("SELECT count(name) FROM reviews WHERE name LIKE '%#{name}%'")[0][0]
+    clean_name = name
+    clean_name.gsub!(/[!@#$%^&*(){}:;'"]/, "")
+    result = Database.execute("SELECT count(name) FROM reviews WHERE name LIKE '%#{clean_name}%'")[0][0]
     if result > 0
       return true
     else

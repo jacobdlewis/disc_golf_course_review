@@ -81,4 +81,23 @@ describe Review do
     end
   end
 
+  describe "#get_reviews" do
+    before do
+      Review.new("Seven Oaks Park", "Nashville", "TN", 23, "Awesome!").save
+    end
+    describe "if the specified course exists" do
+      it "should return an array of arrays containing name, city, state, comment, and completion dates" do
+        result = Review.get_reviews("Seven Oaks Park")
+        result[0].pop
+        assert_equal result, [["Seven Oaks Park", "Nashville", "TN", "Awesome!"]]
+      end
+    end
+    describe "If the specified course doesn't exist" do
+      it "should return an error message" do
+        result = Review.get_reviews("Paradise Park")
+        assert_equal result, "Course not found"
+      end
+    end
+  end
+
 end
