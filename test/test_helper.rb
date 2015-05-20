@@ -13,7 +13,7 @@ Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(reporter_opti
 require 'minitest/autorun'
 
 def main_menu
-  "\n1. Add a course to your Wish List\n2. View your course Wish List\n3. View your played courses\n4. See your stats\n5. Exit\n"
+  "\n* Welcome to Disc Golf Course Tracker *\n\n1. Add a course to your Wish List\n2. View your course Wish List\n3. View your played courses\n4. See your stats\n5. Exit\n"
 end
 
 def view_courses_submenu

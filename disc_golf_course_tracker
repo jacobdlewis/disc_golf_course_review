@@ -11,6 +11,7 @@ elsif ARGV.length == 0
   loop do
     choose do |menu|
       menu.prompt = ""
+      say("\n* Welcome to Disc Golf Course Tracker *\n")
       menu.choice("Add a course to your Wish List") {
         courses_controller = CoursesController.new
         courses_controller.prompt
