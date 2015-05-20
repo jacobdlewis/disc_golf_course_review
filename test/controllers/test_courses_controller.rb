@@ -56,15 +56,47 @@ describe CoursesController do
 
   describe ".complete" do
     let(:courses_controller) { CoursesController.new }
-    before do
-      courses_controller.add("Elver", "Madison", "WI")
-      courses_controller.complete("Elver", "Heavily wooded, but fun!")
+    describe "when the course exists"do
+      before do
+        courses_controller.add("Elver", "Madison", "WI")
+        courses_controller.complete("Elver", "Heavily wooded, but fun!")
+      end
+      it "should remove the course from the courses table" do
+        assert_equal 0, Course.count
+        assert_equal 1, Review.count
+      end
     end
-    it "should remove the course from the courses table" do
-      assert_equal 0, Course.count
-      assert_equal 1, Review.count
+    describe "when the course doesn't exist" do
+      it "should return an error message" do
+        expected = "Course not found"
+        assert_equal expected, courses_controller.complete("Capital Springs", "Short but fun!")
+      end
+      before do
+        courses_controller.add("Elver", "Madison", "WI")
+      end
+      it "should not delete a course from the courses table" do
+        course_count = Course.count
+        response = courses_controller.complete("Olympic Course", "Best in the world!")
+        assert_equal "Course not found", response
+        assert_equal 1, course_count
+      end
+    end
+    describe "when the course name is bad input" do
+      describe "when the name is blank" do
+        it "should return course not found" do
+        expected = "Course not found"
+        actual = courses_controller.complete("Olympia Springs Park", "Doesn't even exist!")
+        assert_equal expected, actual
+        end
+      end
+      describe "when the name is non-word" do
+        it "should return course not found" do
+          expected = "Course not found"
+          actual = courses_controller.complete("@#@;select * from courses where name like \"%\";%!#@$&}", "Doesn't even exist!")
+          assert_equal expected, actual
+        end
+      end
     end
   end
-
 
 end
