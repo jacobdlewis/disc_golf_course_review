@@ -13,10 +13,15 @@ class ReviewsController
   end
 
   def show_reviews(course)
-    reviews = Review.get_reviews(course)
-    result = "\nReviews for #{reviews[0][0]}:\n\n"
-    reviews.each_with_index do |review, index|
-      result << "#{Date.parse(review[4]).strftime('%B %d, %Y')} - #{review[3]}\n\n"
+    result = ""
+    if Review.exists?(course)
+      reviews = Review.get_reviews(course)
+      result << "\nReviews for #{reviews[0][0]}:\n\n"
+      reviews.each_with_index do |review, index|
+        result << "#{Date.parse(review[4]).strftime('%B %d, %Y')} - #{review[3]}\n\n"
+      end
+    else
+      result << "Course not found"
     end
     result
   end
@@ -63,14 +68,14 @@ class ReviewsController
   end
 
   def show_user_stats
-say("\n")
-say("User Stats:\n\n")
-review_noun = Review.count == 1 ? "review" : "reviews"
-course_noun = Course.count == 1 ? "course" : "courses"
-say("* You have written #{Review.count} #{review_noun}")
-say("* You have #{Course.count} Wish List #{course_noun}")
-say(ReviewsController.new.state_with_most_reviewed_courses)
-say(CoursesController.new.state_with_most_wish_list_courses)
+    say("\n")
+    say("User Stats:\n\n")
+    review_noun = Review.count == 1 ? "review" : "reviews"
+    course_noun = Course.count == 1 ? "course" : "courses"
+    say("* You have written #{Review.count} #{review_noun}")
+    say("* You have #{Course.count} Wish List #{course_noun}")
+    say(ReviewsController.new.state_with_most_reviewed_courses)
+    say(CoursesController.new.state_with_most_wish_list_courses)
   end
 
 end

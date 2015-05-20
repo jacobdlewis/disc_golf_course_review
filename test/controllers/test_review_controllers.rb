@@ -26,6 +26,12 @@ describe CoursesController do
       expected = "\nReviews for Rollin Ridge:\n\nMay 20, 2015 - One of the Best!\n\nMay 20, 2015 - Lots of bugs today, but the grass was freshly mowed.\n\n"
       assert_equal expected, reviews_controller.show_reviews("Rollin Ridge")
     end
+    describe "With bad input" do
+      it "should return 'Course not found'" do
+        assert_equal "Course not found", reviews_controller.show_reviews("")
+        assert_equal "Course not found", reviews_controller.show_reviews("asdlkfjasdlkfj")
+      end
+    end
   end
 
   describe ".state_with_most_reviewed_courses" do

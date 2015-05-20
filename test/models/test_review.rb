@@ -79,6 +79,17 @@ describe Review do
       Review.new("Seven Oaks Park", "Nashville", "TN", 23, "Awesome!").save
       assert_equal false, Review.exists?("Ocean Salty Park")
     end
+    describe "if the input is bad" do
+      it "should return false for empty string" do
+        assert_equal false, Review.exists?("")
+      end
+      it "should return false for nil" do
+        assert_equal false, Review.exists?(nil)
+      end
+      it "should return false for non-word characters" do
+        assert_equal false, Review.exists?("$$%()$*()*:JSLKFJS:;SLdfkjSelect*From courses;")
+      end
+    end
   end
 
   describe "#get_reviews" do
