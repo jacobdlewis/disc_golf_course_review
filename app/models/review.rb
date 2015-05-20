@@ -35,6 +35,7 @@ class Review
   end
 
   def self.exists?(name)
+    return false if name == "" || name.nil?
     clean_name = name
     clean_name.gsub!(/[!@#$%^&*(){}:;'"]/, "")
     result = Database.execute("SELECT count(name) FROM reviews WHERE name LIKE '%#{clean_name}%'")[0][0]
