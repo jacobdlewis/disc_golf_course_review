@@ -100,4 +100,22 @@ describe Review do
     end
   end
 
+  describe "#get_most_represented_state" do
+    describe "when there are no courses" do
+      it "should return 'N/A'" do
+        assert_equal "N/A", Review.get_most_represented_state
+      end
+    end
+    describe "when there are multiple courses" do
+      it "should return an array with the most represented state and its count" do
+        Review.new("Seven Oaks Park", "Nashville", "TN", 23, "Awesome!").save
+        Review.new("Cedar Hill", "Nashville", "TN", 20, "Awesome!").save
+        Review.new("Elver Park", "Madison", "WI", 25, "Super!").save
+        Review.new("Scottish Isle", "Phoenex", "AZ", 18, "Awesome!").save
+        Review.new("Crockett", "Brentwood", "TN", 2, "Super!").save
+        assert_equal ["TN", 3], Review.get_most_represented_state
+      end
+    end
+  end
+
 end

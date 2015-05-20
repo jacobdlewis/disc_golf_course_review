@@ -27,4 +27,20 @@ describe CoursesController do
       assert_equal expected, reviews_controller.show_reviews("Rollin Ridge")
     end
   end
+
+  describe ".state_with_most_reviewed_courses" do
+    let(:reviews_controller) {ReviewsController.new}
+    it "should return a string indicating the state with the most courses" do
+      Review.new("Seven Oaks Park", "Nashville", "TN", 23, "Awesome!").save
+      Review.new("Cedar Hill", "Nashville", "TN", 20, "Awesome!").save
+      Review.new("Elver Park", "Madison", "WI", 25, "Super!").save
+      Review.new("Scottish Isle", "Eu Claire", "WI", 18, "Awesome!").save
+      Review.new("Crockett", "Brentwood", "TN", 2, "Super!").save
+      expected = "* Most of your completed courses are in TN (3 courses)"
+      assert_equal expected, reviews_controller.state_with_most_reviewed_courses
+    end
+  end
+
+
+
 end

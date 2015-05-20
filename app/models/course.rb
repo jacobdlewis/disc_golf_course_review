@@ -56,6 +56,21 @@ class Course
     end
   end
 
+  def self.get_most_represented_state
+    result = Database.execute <<-SQL
+SELECT state, COUNT(state) as 'state_count'
+FROM (SELECT * FROM courses GROUP BY name)
+GROUP BY state
+ORDER BY state_count DESC
+LIMIT 1;
+SQL
+    if result == []
+      return "N/A"
+    else
+      return result[0]
+    end
+  end
+
   def save
     return false unless valid?
     Database.execute("INSERT INTO courses (name, city, state) VALUES (?, ?, ?)", name, city, state)

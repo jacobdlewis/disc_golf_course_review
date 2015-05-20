@@ -39,6 +39,12 @@ class ReviewsController
     end
   end
 
+  def state_with_most_reviewed_courses
+    result = Review.get_most_represented_state
+    review_noun = Review.count == 1 ? "course" : "courses"
+    return "* Most of your completed courses are in #{result[0]} (#{result[1]} #{review_noun})"
+  end
+
   def submenu_prompt
     choose do |submenu|
     submenu.prompt = ""
@@ -54,6 +60,17 @@ class ReviewsController
     }
     submenu.choice("Return to main menu") {}
     end
+  end
+
+  def show_user_stats
+say("\n")
+say("User Stats:\n\n")
+review_noun = Review.count == 1 ? "review" : "reviews"
+course_noun = Course.count == 1 ? "course" : "courses"
+say("* You have written #{Review.count} #{review_noun}")
+say("* You have one #{Course.count} Wish List #{course_noun}")
+say(ReviewsController.new.state_with_most_reviewed_courses)
+say(CoursesController.new.state_with_most_wish_list_courses)
   end
 
 end

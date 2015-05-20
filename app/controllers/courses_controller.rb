@@ -61,6 +61,12 @@ class CoursesController
     end
   end
 
+  def state_with_most_wish_list_courses
+    result = Course.get_most_represented_state
+    course_noun = Course.count == 1 ? "course" : "courses"
+    return "* Most of your Wish List courses are in #{result[0]} (#{result[1]} #{course_noun})"
+  end
+
   def prompt
     name = ask("What is the name of the course?")
     city = ask("In what city is the course located?")

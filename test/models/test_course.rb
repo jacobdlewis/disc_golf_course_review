@@ -170,4 +170,23 @@ describe Course do
       end
     end
   end
+
+  describe "#get_most_represented_state" do
+    describe "when there are no courses" do
+      it "should return 'N/A'" do
+        assert_equal "N/A", Course.get_most_represented_state
+      end
+    end
+    describe "when there are multiple courses" do
+      it "should return an array with the most represented state and its count" do
+        Course.new("Seven Oaks Park", "Nashville", "TN").save
+        Course.new("Cedar Hill", "Nashville", "TN").save
+        Course.new("Elver Park", "Madison", "WI").save
+        Course.new("Heistand Isle", "Madison", "WI").save
+        Course.new("Rollin Ridge", "Eu Claire", "WI").save
+        assert_equal ["WI", 3], Course.get_most_represented_state
+      end
+    end
+  end
+
 end

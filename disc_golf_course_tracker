@@ -22,6 +22,9 @@ elsif ARGV.length == 0
         reviews_controller = ReviewsController.new
         reviews_controller.index
         reviews_controller.submenu_prompt }
+      menu.choice("See your stats") {
+        ReviewsController.new.show_user_stats
+      }
       menu.choice("Exit") {
         say("Goodbye!")
         exit

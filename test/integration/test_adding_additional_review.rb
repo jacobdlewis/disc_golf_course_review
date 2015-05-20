@@ -44,7 +44,7 @@ class TestAddingAdditionalReview < Minitest::Test
       pipe.puts "A wonderful course designed by an expert."
       expected_output << "\nNew review of Token Creek added successfully.\n"
       expected_output << main_menu
-      pipe.puts "4"
+      pipe.puts "5"
       expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read

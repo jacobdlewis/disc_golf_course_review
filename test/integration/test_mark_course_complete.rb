@@ -39,7 +39,7 @@ class TestMarkingCourseComplete < Minitest::Test
       expected_output << "\nCompleted Courses:\n\n1. Token Creek (Madison, WI) Reviews: 1\n\nWould you like to...\n1. See all reviews for a course\n2. Add a review to a course\n3. Return to main menu\n"
       pipe.puts "3"
       expected_output << main_menu
-      pipe.puts "4"
+      pipe.puts "5"
       expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read
@@ -80,7 +80,7 @@ class TestMarkingCourseComplete < Minitest::Test
       pipe.puts ""
       expected_output << "Course not found\n"
       expected_output << main_menu
-      pipe.puts "4"
+      pipe.puts "5"
       expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read

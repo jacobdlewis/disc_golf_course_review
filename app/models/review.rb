@@ -54,6 +54,21 @@ class Review
     end
   end
 
+  def self.get_most_represented_state
+    result = Database.execute <<-SQL
+SELECT state, COUNT(state) as 'state_count'
+FROM (SELECT * FROM reviews GROUP BY course_id)
+GROUP BY state
+ORDER BY state_count DESC
+LIMIT 1;
+SQL
+    if result == []
+      return "N/A"
+    else
+      return result[0]
+    end
+  end
+
   def valid?
     if name.nil? or name.empty? or /\d+$/.match(name)
       @errors = "\"#{name}\" is not a valid course name."

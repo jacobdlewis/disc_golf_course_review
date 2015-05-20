@@ -26,7 +26,7 @@ class TestDeletingWishListCourses < Minitest::Test
       pipe.puts "2"
       expected_output << "No courses found. Add a course.\n"
       expected_output << main_menu
-      pipe.puts "4"
+      pipe.puts "5"
       expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read
@@ -61,7 +61,7 @@ class TestDeletingWishListCourses < Minitest::Test
       pipe.puts "2"
       expected_output << "No courses found. Add a course.\n"
       expected_output << main_menu
-      pipe.puts "4"
+      pipe.puts "5"
       expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read

@@ -104,4 +104,17 @@ describe CoursesController do
     end
   end
 
+  describe ".state_with_most_reviewed_courses" do
+    let(:courses_controller) {CoursesController.new}
+    it "should return a string indicating the state with the most courses" do
+      Course.new("Seven Oaks Park", "Nashville", "TN").save
+      Course.new("Cedar Hill", "Nashville", "TN").save
+      Course.new("Elver Park", "Madison", "WI").save
+      Course.new("Scottish Isle", "Eu Claire", "WI").save
+      Course.new("Crockett", "Brentwood", "TN").save
+      expected = "* Most of your Wish List courses are in TN (3 courses)"
+      assert_equal expected, courses_controller.state_with_most_wish_list_courses
+    end
+  end
+
 end

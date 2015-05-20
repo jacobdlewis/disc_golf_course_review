@@ -30,7 +30,7 @@ class TestUpdatingWishListCourses < Minitest::Test
       expected_output << view_courses_submenu
       pipe.puts "4"
       expected_output << main_menu
-      pipe.puts "4"
+      pipe.puts "5"
       expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read
@@ -67,7 +67,7 @@ class TestUpdatingWishListCourses < Minitest::Test
       expected_output << view_courses_submenu
       pipe.puts "4"
       expected_output << main_menu
-      pipe.puts "4"
+      pipe.puts "5"
       expected_output << "Goodbye!\n"
       pipe.close_write
       shell_output = pipe.read
