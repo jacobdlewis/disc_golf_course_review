@@ -87,7 +87,7 @@ class TestListingMultipleCourseReviews < Minitest::Test
       pipe.puts "1"
       expected_output << "What is the name of the course for which you want to see reviews?\n"
       pipe.puts "Token Creek"
-      expected_output << "\nReviews for Token Creek:\n\nMay 21, 2015 - Great Course!\n\n"
+      expected_output << "\nReviews for Token Creek:\n\n#{Date.today.strftime('%B %d, %Y')} - Great Course!\n\n"
       expected_output << main_menu
       pipe.puts "5"
       expected_output << "Goodbye!\n"

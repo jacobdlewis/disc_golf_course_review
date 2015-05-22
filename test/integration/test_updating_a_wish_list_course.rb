@@ -60,7 +60,7 @@ class TestUpdatingWishListCourses < Minitest::Test
       pipe.puts "Seven Oaks Park"
       expected_output << "What is the new name for Seven Oaks Park?\n"
       pipe.puts "*****"
-      expected_output << "***** isn't a valid name.\n"
+      expected_output << "Update unsuccessful. Name is invalid\n"
       expected_output << main_menu
       pipe.puts "2"
       expected_output << "\nYour Wish List Courses are:\n1. Seven Oaks Park (Nashville, TN)\n"

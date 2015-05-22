@@ -5,7 +5,6 @@ class CoursesController
       courses = Course.all # all of the courses in an array
       say("\nYour Wish List Courses are:\n")
       courses.each_with_index do |course, index|
-        course = Course.new(course[1],course[2],course[3])
         say("#{index + 1}. #{course.name} (#{course.city}, #{course.state})")
       end
       say("\n")
@@ -16,13 +15,12 @@ class CoursesController
   end
 
   def update(current_name, new_name)
-    if Course.insert(current_name, new_name) == "original name invalid"
-      return "#{current_name} isn't a valid course name.\n"
-    elsif Course.insert(current_name, new_name) == "new name invalid"
-      return "#{new_name} isn't a valid name.\n"
+    course = Course.find_by(name: current_name)
+    return "Course not found" if course.nil?
+    if course.update(:name => new_name)
+      "Thank you. #{current_name} is now stored as #{course.name}."
     else
-      Course.insert(current_name, new_name)
-      return "Thank you. #{current_name} is now stored as #{new_name}."
+      "Update unsuccessful. #{course.errors.full_messages[0]}"
     end
   end
 
@@ -34,30 +32,28 @@ class CoursesController
     if course.save
       "Thank you. #{name} has been added to your course Wish List."
     else
-      course.errors
+      course.errors.full_messages[0]
     end
   end
 
   def complete(name, comment)
     if Course.exists?(name)
-      courseInfo = Course.getCourseInfo(name)
-      course_name = courseInfo[0]
-      course_id = courseInfo[1]
-      city = courseInfo[2]
-      state = courseInfo[3]
-      Review.new(course_name, city, state, course_id, comment).save
-      Course.delete(name)
-      "#{course_name} was successfully marked as completed."
+      course = Course.find_by(name: name)
+      Review.new(course.name, course.city, course.state, course.id, comment).save
+      course.destroy
+      "#{course.name} was successfully marked as completed."
     else
       "Course not found"
     end
   end
 
   def remove(name)
-    if Course.delete(name)
-      "#{name} was deleted successfully"
-    else
+    course = Course.find_by(name: name)
+    if course.nil?
       "Course not found"
+    else
+      course.destroy
+      "#{name} was deleted successfully"
     end
   end
 

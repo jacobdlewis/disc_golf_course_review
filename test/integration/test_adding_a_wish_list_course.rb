@@ -36,7 +36,7 @@ class AddNewCourseTest < Minitest::Test
       pipe.puts "Nashville"
       expected_output << "In what state is the course located?\n"
       pipe.puts "TN"
-      expected_output << "\"\" is not a valid course name.\n"
+      expected_output << "Name can't be blank\n"
       expected_output << main_menu
       pipe.puts "5"
       expected_output << "Goodbye!\n"
