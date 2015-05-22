@@ -15,11 +15,11 @@ class ReviewsController
   def show_reviews(course)
     result = ""
     if Review.exists?(course)
-      reviews = Review.get_reviews(course)
-      result << "\nReviews for #{reviews[0][0]}:\n\n"
-      reviews.each_with_index do |review, index|
-        result << "#{Date.parse(review[4]).strftime('%B %d, %Y')} - #{review[3]}\n\n"
+      result << "\nReviews for :\n\n"
+      Review.where(name: course_name).find_each do |review|
+        result << "review.comment"
       end
+      result
     else
       result << "Course not found"
     end
