@@ -1,0 +1,11 @@
+development:
+  adapter: sqlite3
+  database: db/disc_golf_course_trakcer_production.sqlite
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: sqlite3
+  database: db/disc_golf_course_tracker_test.sqlite
+  pool: 5
+  timeout: 5000

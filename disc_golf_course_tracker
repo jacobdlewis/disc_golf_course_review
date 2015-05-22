@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 require 'highline/import'
+require_relative 'lib/environment'
 
-Dir["./app/**/*.rb"].each { |file| require file }
-Dir["./lib/*.rb"].each { |file| require file }
+
 
 
 if ARGV.length > 0

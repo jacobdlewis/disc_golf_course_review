@@ -14,9 +14,6 @@ describe Course do
         course_2 = Course.new("Rollin Ridge", "Baraboo", "WI")
         course_2.save
       end
-      it "should return an array" do
-        assert_equal Array, Course.all.class
-      end
       it "should return the courses in alphabetical order" do
         expected = [["Rollin Ridge", "Baraboo", "WI"],
                     ["Seven Oaks Park", "Nashville", "TN"]]
@@ -74,7 +71,7 @@ describe Course do
   describe ".initialize" do
     describe "if a name is provided" do
       it "sets the name attribute" do
-        course = Course.new('foo', "bar", "baz")
+        course = Course.new('foo', "bar", "baz").save
         assert_equal "foo", course.name
       end
     end
