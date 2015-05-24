@@ -9,7 +9,6 @@ class Review < ActiveRecord::Base
   validates :course_id, presence: true,
             allow_blank: false, numericality: true
   validates :comment, presence: true, allow_blank: false
-  validates :completion_date, presence: true
 
   def initialize(name, city, state, course_id, comment)
     super(name: name, city: city, state: state, course_id: course_id, comment: comment)
@@ -22,10 +21,12 @@ class Review < ActiveRecord::Base
   end
 
   def self.get_reviews(course_name)
+    result = []
     if exists?(course_name)
       Review.find_each do |review|
-        print(review)
+        result.push(review)
       end
+      return result
     else
       return "Course not found"
     end

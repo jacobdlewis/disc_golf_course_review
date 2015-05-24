@@ -26,8 +26,8 @@ numericality: false }
     return false if name == "" || name.nil?
     clean_name = name
     clean_name.gsub!(/[!@#$%^&*(){}:;'"]/, "")
-    result = Database.execute("SELECT * FROM courses WHERE name LIKE '%#{clean_name}%'")
-    if result == []
+    result = Review.find_by(name: name)
+    if result.nil?
       false
     else
       true

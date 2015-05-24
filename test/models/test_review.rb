@@ -42,10 +42,9 @@ describe Review do
   end
 
   describe ".save" do
-    before do
-      Review.new("Seven Oaks Park", "Nashville", "TN", 1, "Great course!").save
-    end
     it "should save the model to the database" do
+      course = Review.new("Seven Oaks Park", "Nashville", "TN", 1, "Great course!")
+      course.save
       assert_equal 1, Review.count
       course = Review.find_by(name: "Seven Oaks Park")
       assert_equal "Nashville", course.city
@@ -83,7 +82,7 @@ describe Review do
     describe "if the specified course exists" do
       it "should return an array of the requested data" do
         result = Review.get_reviews("Seven Oaks Park")
-        assert_equal true, result
+        assert_equal Array, result.class
       end
     end
     describe "If the specified course doesn't exist" do
