@@ -145,6 +145,7 @@ describe Course do
       Course.new("Seven Oaks Park", "Nashville", "TN").save
     end
     it "should return true if the course is in the courses table" do
+      assert_equal 1, Course.count
       assert_equal true, Course.exists?("Seven Oaks Park")
     end
     it "should return false if the course isn't in the courses table" do

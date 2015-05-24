@@ -25,12 +25,12 @@ numericality: false }
   def self.exists?(name)
     return false if name == "" || name.nil?
     clean_name = name
-    clean_name.gsub!(/[!@#$%^&*(){}:;'"]/, "")
-    result = Review.find_by(name: name)
+    clean_name.gsub!(/[!@#$%^&*(){}:;]/, "")
+    result = Course.find_by(name: name)
     if result.nil?
-      false
+      return false
     else
-      true
+      return true
     end
   end
 
