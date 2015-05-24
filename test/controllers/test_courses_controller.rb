@@ -13,13 +13,13 @@ describe CoursesController do
     it "should not add a course name with all blanks" do
       course_name = "      "
       result = courses_controller.add(course_name, "Nowhere", "XX")
-      assert_equal "\"\" is not a valid course name.", result
+      assert_equal "Name can't be blank", result
     end
 
     it "should not add a course name comprised of all numbers" do
       course_name = "5656565"
       result = courses_controller.add(course_name, "Nowhere", "XX")
-      assert_equal "\"5656565\" is not a valid course name.", result
+      assert_equal "Name is invalid", result
     end
 
   end
@@ -47,7 +47,7 @@ describe CoursesController do
       courses_controller.add("Elver", "Madison", "WI")
     end
     it "should ask for another name if the first is invalid" do
-      assert_equal "  isn't a valid course name.\n", courses_controller.update(" ", "Elver")
+      assert_equal "Course not found", courses_controller.update(" ", "Elver")
     end
     it "should confirm that the name was updated" do
       assert_equal "Thank you. Elver is now stored as Heistand.", courses_controller.update("Elver", "Heistand")

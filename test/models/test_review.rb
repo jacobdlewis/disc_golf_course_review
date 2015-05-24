@@ -9,11 +9,9 @@ describe Review do
       end
     end
     describe "if there are scenarios" do
-      before do
-        Review.new("Seven Oaks Park", "Nashville", "TN", 1, "Great course!" ).save
-        Review.new("Rollin Ridge", "Nowhere", "WI", 2, "One of the Best!").save
-      end
       it "should return the correct count" do
+        Review.new("The Park", "Nashville", "TN", 1, "Great course").save
+        Review.new("SevenOaksPark", "Nashville", "TN", 1, "Great course").save
         assert_equal 2, Review.count
       end
     end
@@ -44,31 +42,15 @@ describe Review do
   end
 
   describe ".save" do
-    let (:review) { Review.new("Seven Oaks Park", "Nashville", "TN", 1, "Great course!").save }
     it "should save the model to the database" do
-      review
+      course = Review.new("Seven Oaks Park", "Nashville", "TN", 1, "Great course!")
+      course.save
       assert_equal 1, Review.count
-      last_row = Database.execute("SELECT * FROM reviews")
-      database_name = last_row[0][1]
-      assert_equal "Seven Oaks Park", database_name
-    end
-    it "should populate the model with id from the database" do
-      review
-      database_id = Database.execute("SELECT * FROM reviews")[0][0]
-      assert_equal database_id, review
+      course = Review.find_by(name: "Seven Oaks Park")
+      assert_equal "Nashville", course.city
     end
   end
 
-  describe "#get_course_info" do
-    it "should return the course_id of the named course" do
-      Review.new("Seven Oaks Park", "Nashville", "TN", 23, "Awesome!").save
-      assert_equal [23, "Nashville", "TN"], Review.get_course_info("Seven Oaks Park")
-    end
-    it "should return an error message if the id doesn't exist" do
-      Review.new("Elver Park", "Madison", "WI", 14, "Amazing! Huzzah!").save
-      assert_equal "ID not found", Review.get_course_info("Spanish Moss Course")
-    end
-  end
 
   describe "#exists?" do
     it  "should return true if the named course exists" do
@@ -95,12 +77,12 @@ describe Review do
   describe "#get_reviews" do
     before do
       Review.new("Seven Oaks Park", "Nashville", "TN", 23, "Awesome!").save
+      Review.new("Cedar Hill Park", "Nashville", "TN", 23, "Awesome!").save
     end
     describe "if the specified course exists" do
-      it "should return an array of arrays containing name, city, state, comment, and completion dates" do
+      it "should return an array of the requested data" do
         result = Review.get_reviews("Seven Oaks Park")
-        result[0].pop
-        assert_equal result, [["Seven Oaks Park", "Nashville", "TN", "Awesome!"]]
+        assert_equal Array, result.class
       end
     end
     describe "If the specified course doesn't exist" do

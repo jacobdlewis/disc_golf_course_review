@@ -15,11 +15,14 @@ class ReviewsController
   def show_reviews(course)
     result = ""
     if Review.exists?(course)
-      reviews = Review.get_reviews(course)
-      result << "\nReviews for #{reviews[0][0]}:\n\n"
-      reviews.each_with_index do |review, index|
-        result << "#{Date.parse(review[4]).strftime('%B %d, %Y')} - #{review[3]}\n\n"
+      result = ""
+      x = 0
+      Review.where(name: course).find_each do |review|
+        x += 1
+        result << ("\nReviews for #{review.name}:\n\n") if x == 1
+        result << "#{review.completion_date.strftime('%B %d, %Y')} - #{review.comment}\n\n"
       end
+      result
     else
       result << "Course not found"
     end
@@ -34,11 +37,8 @@ class ReviewsController
   def add_additional_review(name, comment)
     return "Course not found" if name == "" || name.nil?
     if Review.exists?(name)
-      course_info = Review.get_course_info(name)
-      course_id = course_info[0]
-      city = course_info[1]
-      state = course_info[2]
-      Review.new(name, city, state, course_id, comment).save
+      course = Review.find_by(name: name)
+      Review.new(course.name, course.city, course.state, course.course_id, comment).save
       "\nNew review of #{name} added successfully."
     else
       "Course not found"
